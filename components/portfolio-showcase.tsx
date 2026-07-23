@@ -44,7 +44,7 @@ const portfolioItems = [
   {
     src: "/portfolio/full/cidade-em-foco/005-eduardo-0270.webp",
     label: "Cidade",
-    meta: "Drone · paisagem · perspectiva",
+    meta: "Técnica · longa exposição · perspectiva",
     position: "center 50%",
     gallery: "/galerias/cidade-em-foco",
   },
@@ -127,7 +127,7 @@ export function PortfolioShowcase() {
             em cena
           </h2>
           <p className="mt-8 max-w-sm font-serif text-2xl italic leading-snug text-cream/70 md:text-3xl">
-            Uma amostra visual do trabalho: eventos, retratos, workshops, coberturas automotivas e imagens aéreas.
+            Uma amostra visual do trabalho: eventos, retratos, workshops, coberturas automotivas e técnica fotográfica.
           </p>
           <Link
             href="/#galerias"
@@ -152,7 +152,7 @@ export function PortfolioShowcase() {
                 alt={`${activeItem.label} — Magon Fotografia`}
                 fill
                 sizes="(max-width: 768px) 100vw, 66vw"
-                className="object-cover"
+                className={activeItem.label === "Retratos" ? "object-contain" : "object-cover"}
                 style={{ objectPosition: activeItem.position }}
                 priority={active === 0}
               />

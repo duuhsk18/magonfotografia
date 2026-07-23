@@ -63,6 +63,8 @@ export default function ProjectPage() {
             alt={`${project.title} — ${project.category}`}
             priority
             sizes="100vw"
+            objectFit={project.category.includes("RETRATOS") ? "contain" : "cover"}
+            objectPosition={project.category.includes("RETRATOS") ? "center 20%" : "center center"}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-charcoal/40" />
           <div className="absolute bottom-0 left-0 w-full p-6 md:p-12">

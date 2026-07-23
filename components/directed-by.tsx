@@ -11,9 +11,9 @@ const STEPS = [
     description: "Câmera dentro do acontecimento. Registro de perto, sem ensaio, sem segunda chance.",
   },
   {
-    label: "Drone · Perspectiva aérea",
+    label: "Técnica · Longa exposição",
     src: "/portfolio/full/cidade-em-foco/005-eduardo-0270.webp",
-    description: "Voo planejado, imagem que contextualiza. Onde o evento acontece vira parte da narrativa.",
+    description: "Imagem feita na estação com controle de tempo, luz e movimento. Técnica aplicada para transformar o lugar em sensação.",
   },
   {
     label: "Empresas · Cobertura automotiva",
@@ -62,10 +62,10 @@ export function DirectedBy() {
             </h2>
             <div className="mt-10 space-y-6 max-w-md">
               <p className="font-serif text-2xl italic leading-snug text-cream/75 md:text-3xl">
-                Filmagem, drone, cobertura para marcas e eventos. Direção que conecta câmera ao que importa.
+                Filmagem, direção de fotografia, cobertura para marcas e eventos. Direção que conecta câmera ao que importa.
               </p>
               <p className="text-lg leading-relaxed text-cream/55">
-                Cada produção começa pela intenção: o que esse registro precisa comunicar. De voo de drone ao retrato de perto — o enquadramento serve a história, não ao equipamento.
+                Cada produção começa pela intenção: o que esse registro precisa comunicar. Do plano aberto ao retrato de perto — o enquadramento serve a história, não ao equipamento.
               </p>
               <p className="text-lg leading-relaxed text-cream/55">
                 Cobrimos desde a preparação do palco até a entrega de galeria. Empresa, evento ou projeto pessoal — a direção criativa é a mesma: presente, intencional e construída para ser lembrada.
@@ -119,7 +119,7 @@ function ParallaxImage({
         style={{ clipPath: clip }}
         className={`relative ${ratio} w-full overflow-hidden bg-charcoal-soft`}
       >
-        <motion.div style={{ scale, y }} className="h-full w-full">
+        <motion.div style={{ scale, y }} className="relative h-full w-full">
           <Image
             src={step.src}
             alt={`Magon — ${step.label}`}

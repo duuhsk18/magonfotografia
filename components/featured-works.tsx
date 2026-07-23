@@ -142,6 +142,9 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
 function ProjectSlideshow({ slides, alt }: { slides: string[]; alt: string }) {
   const [current, setCurrent] = useState(0);
   const reduce = useReducedMotion();
+  const isPortraitSet = slides[current]?.includes("/retratos-");
+  const imageFit = isPortraitSet ? "object-contain" : "object-cover";
+  const imagePosition = isPortraitSet ? "center 18%" : "center center";
 
   useEffect(() => {
     if (reduce || slides.length <= 1) return;
@@ -159,7 +162,8 @@ function ProjectSlideshow({ slides, alt }: { slides: string[]; alt: string }) {
         alt={alt}
         fill
         sizes="(max-width: 768px) 100vw, 1400px"
-        className="object-cover transition-opacity duration-700"
+        className={`${imageFit} transition-opacity duration-700`}
+        style={{ objectPosition: imagePosition }}
       />
     </div>
   );

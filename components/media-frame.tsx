@@ -11,6 +11,8 @@ interface MediaFrameProps {
   priority?: boolean;
   className?: string;
   sizes?: string;
+  objectFit?: "cover" | "contain";
+  objectPosition?: string;
 }
 
 /**
@@ -27,6 +29,8 @@ export function MediaFrame({
   priority = false,
   className = "",
   sizes = "100vw",
+  objectFit = "cover",
+  objectPosition = "center center",
 }: MediaFrameProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -54,7 +58,8 @@ export function MediaFrame({
       {videoSrc ? (
         <video
           ref={videoRef}
-          className="h-full w-full object-cover"
+          className={`h-full w-full ${objectFit === "contain" ? "object-contain" : "object-cover"}`}
+          style={{ objectPosition }}
           poster={poster}
           muted
           loop
@@ -71,7 +76,8 @@ export function MediaFrame({
           fill
           priority={priority}
           sizes={sizes}
-          className="object-cover"
+          className={objectFit === "contain" ? "object-contain" : "object-cover"}
+          style={{ objectPosition }}
         />
       )}
 

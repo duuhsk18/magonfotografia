@@ -1366,7 +1366,7 @@ export const portfolioGalleries = [
     "category": "Cobertura Eventos",
     "sourcePath": "COBERTURA EVENTOS  /  BARES E CLUBS",
     "count": 10,
-    "cover": "/portfolio/full/cobertura-eventos-rave/003-mg-3648.webp",
+    "cover": "/portfolio/full/cobertura-eventos-bares-e-clubs/001-modelo-carrossel-10-fotos-01.webp",
     "photos": [
       {
         "id": "cobertura-eventos-bares-e-clubs-001-modelo-carrossel-10-fotos-01",
