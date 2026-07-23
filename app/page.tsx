@@ -1,23 +1,33 @@
-import { Navigation } from '@/components/Navigation';
-import { Hero } from '@/components/Hero';
-import { ProjectGrid } from '@/components/ProjectGrid';
-import { Manifesto } from '@/components/Manifesto';
-import { Services } from '@/components/Services';
-import { BehindTheScenes } from '@/components/BehindTheScenes';
-import { Contact } from '@/components/Contact';
-import { Footer } from '@/components/Footer';
+import { SmoothScroll } from "@/components/smooth-scroll";
+import { CustomCursor } from "@/components/custom-cursor";
+import { ScrollProgress } from "@/components/scroll-progress";
+import { Preloader } from "@/components/preloader";
+import { Hero } from "@/components/hero";
+import { Manifesto } from "@/components/manifesto";
+import { FeaturedWorks } from "@/components/featured-works";
+import { Marquee } from "@/components/marquee";
+import { Services } from "@/components/services";
+import { DirectedBy } from "@/components/directed-by";
+import { CTA } from "@/components/cta";
+import { Footer } from "@/components/footer";
 
 export default function Page() {
   return (
-    <main className="w-full">
-      <Navigation />
-      <Hero />
-      <ProjectGrid />
-      <Manifesto />
-      <Services />
-      <BehindTheScenes />
-      <Contact />
-      <Footer />
-    </main>
+    <>
+      <Preloader />
+      <SmoothScroll />
+      <CustomCursor />
+      <ScrollProgress />
+      <main className="w-full bg-charcoal">
+        <Hero />
+        <Manifesto />
+        <FeaturedWorks />
+        <Marquee />
+        <Services />
+        <DirectedBy />
+        <CTA />
+        <Footer />
+      </main>
+    </>
   );
 }

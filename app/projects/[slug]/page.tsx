@@ -1,10 +1,12 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { projects } from '@/lib/projects';
-import { useParams } from 'next/navigation';
-import { Footer } from '@/components/Footer';
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { projects } from "@/lib/projects";
+import { MediaFrame } from "@/components/media-frame";
+import { SmoothScroll } from "@/components/smooth-scroll";
+import { CustomCursor } from "@/components/custom-cursor";
+import { Footer } from "@/components/footer";
 
 export default function ProjectPage() {
   const params = useParams();
@@ -16,111 +18,116 @@ export default function ProjectPage() {
 
   if (!project) {
     return (
-      <div className="w-full min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Projeto não encontrado</h1>
-          <Link href="/" className="text-foreground/60 hover:text-foreground transition-colors">
-            Voltar para home
-          </Link>
-        </div>
-      </div>
+      <main className="flex min-h-svh w-full flex-col items-center justify-center bg-charcoal px-6 text-center">
+        <h1 className="font-display text-6xl text-cream">Projeto não encontrado</h1>
+        <Link
+          href="/"
+          className="micro-label mt-6 text-muted-foreground transition-colors hover:text-cream"
+        >
+          ← Voltar para home
+        </Link>
+      </main>
     );
   }
 
   return (
-    <main className="w-full">
-      {/* Header */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 bg-background/80 backdrop-blur-sm">
-        <Link href="/" className="text-sm tracking-widest text-foreground/70 hover:text-foreground transition-colors">
-          ← VOLTAR
-        </Link>
-        <Link href="/" className="text-2xl font-bold tracking-tight text-foreground">
-          MAGON
-        </Link>
-        <div className="w-20" />
-      </div>
+    <>
+      <SmoothScroll />
+      <CustomCursor />
+      <main className="w-full bg-charcoal">
+        {/* Top bar */}
+        <div className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-5 md:px-12">
+          <Link
+            href="/"
+            data-cursor
+            data-cursor-text="Voltar"
+            className="micro-label text-cream mix-blend-difference"
+          >
+            ← Voltar
+          </Link>
+          <Link
+            href="/"
+            className="font-display text-xl text-cream mix-blend-difference"
+          >
+            MAGON
+          </Link>
+          <span className="micro-label text-cream mix-blend-difference">
+            {project.index}
+          </span>
+        </div>
 
-      {/* Hero Image */}
-      <div className="relative w-full h-screen pt-20">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
-
-      {/* Project Details */}
-      <section className="w-full py-16 md:py-24 px-6 md:px-12 bg-background">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 mb-16">
-            <div>
-              <p className="text-xs tracking-widest text-foreground/50 font-medium mb-2">
-                CATEGORIA
-              </p>
-              <p className="text-lg text-foreground">{project.category}</p>
-            </div>
-            <div>
-              <p className="text-xs tracking-widest text-foreground/50 font-medium mb-2">
-                LOCALIZAÇÃO
-              </p>
-              <p className="text-lg text-foreground">{project.city}</p>
-            </div>
-            <div>
-              <p className="text-xs tracking-widest text-foreground/50 font-medium mb-2">
-                ANO
-              </p>
-              <p className="text-lg text-foreground">{project.year}</p>
-            </div>
-          </div>
-
-          <div className="mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-8">
+        {/* Full-bleed hero media */}
+        <section className="relative h-svh w-full overflow-hidden">
+          <MediaFrame
+            poster={project.media}
+            alt={`${project.title} — ${project.category}`}
+            placeholder={project.videoPlaceholder}
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-charcoal/40" />
+          <div className="absolute bottom-0 left-0 w-full p-6 md:p-12">
+            <h1 className="font-display text-[16vw] leading-[0.82] text-warm-white md:text-[10vw]">
               {project.title}
             </h1>
-            <p className="text-xl md:text-2xl text-foreground/70 leading-relaxed">
+          </div>
+        </section>
+
+        {/* Meta + narrative */}
+        <section className="px-6 py-[12vh] md:px-12">
+          <div className="grid grid-cols-2 gap-8 border-b border-border pb-12 md:grid-cols-4">
+            <Meta label="Categoria" value={project.category} />
+            <Meta label="Local" value={project.city} />
+            <Meta label="Ano" value={String(project.year)} />
+            {project.credits ? (
+              <Meta label="Créditos" value={project.credits} />
+            ) : null}
+          </div>
+
+          <div className="mx-auto mt-16 max-w-4xl">
+            <p className="font-serif text-3xl leading-snug text-cream md:text-5xl">
               {project.fullDescription}
             </p>
           </div>
+        </section>
 
-          {project.credits && (
-            <div className="border-t border-foreground/10 pt-8">
-              <p className="text-sm tracking-widest text-foreground/50 font-medium mb-2">
-                CRÉDITOS
-              </p>
-              <p className="text-foreground">{project.credits}</p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Next Project CTA */}
-      <section className="w-full py-16 md:py-24 px-6 md:px-12 bg-foreground text-background">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-12">
-            <p className="text-sm tracking-widest text-background/60 font-medium mb-4">
-              PRÓXIMO PROJETO
-            </p>
-            <Link
-              href={`/projects/${nextProject.slug}`}
-              className="group inline-block"
-            >
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight group-hover:text-background/80 transition-colors">
-                {nextProject.title}
-              </h2>
-            </Link>
-          </div>
+        {/* Next project */}
+        <section className="border-t border-border px-6 py-[14vh] md:px-12">
+          <p className="micro-label mb-6 text-muted-foreground">
+            [ Próximo projeto ]
+          </p>
           <Link
             href={`/projects/${nextProject.slug}`}
-            className="inline-block px-8 py-3 border-2 border-background text-background font-semibold tracking-widest text-sm hover:bg-background/10 transition-all duration-300"
+            data-cursor
+            data-cursor-text="Ver projeto"
+            className="group block"
           >
-            VER PROJETO
+            <span className="micro-label text-muted-foreground">
+              {nextProject.index}
+            </span>
+            <h2 className="font-display text-[15vw] leading-[0.85] text-cream transition-colors duration-300 group-hover:text-warm-white md:text-[9vw]">
+              {nextProject.title}
+            </h2>
+            <span className="micro-label mt-4 inline-flex items-center gap-2 text-cream">
+              {nextProject.category}
+              <span className="transition-transform duration-300 group-hover:translate-x-2">
+                →
+              </span>
+            </span>
           </Link>
-        </div>
-      </section>
+        </section>
 
-      <Footer />
-    </main>
+        <Footer />
+      </main>
+    </>
+  );
+}
+
+function Meta({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="micro-label mb-2 text-muted-foreground">{label}</p>
+      <p className="text-lg text-cream">{value}</p>
+    </div>
   );
 }
