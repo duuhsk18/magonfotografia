@@ -32,7 +32,7 @@ export function Hero() {
   const cutOpacity = useTransform(scrollYProgress, [0.42, 1], [0, 1]);
 
   return (
-    <section ref={ref} className="relative h-[145svh] w-full bg-charcoal">
+    <section ref={ref} className="relative h-[120svh] w-full bg-charcoal md:h-[145svh]">
       <div className="sticky top-0 h-svh w-full overflow-hidden">
         {/* Media layer */}
         <motion.div
