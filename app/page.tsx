@@ -8,6 +8,7 @@ import { Manifesto } from "@/components/manifesto";
 import { FeaturedWorks } from "@/components/featured-works";
 import { Marquee } from "@/components/marquee";
 import { Services } from "@/components/services";
+import { GalleryAccess } from "@/components/gallery-access";
 import { DirectedBy } from "@/components/directed-by";
 import { CTA } from "@/components/cta";
 import { Footer } from "@/components/footer";
@@ -26,6 +27,7 @@ export default function Page() {
         <FeaturedWorks />
         <Marquee />
         <Services />
+        <GalleryAccess />
         <DirectedBy />
         <CTA />
         <Footer />
