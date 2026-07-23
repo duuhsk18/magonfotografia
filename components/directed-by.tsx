@@ -5,10 +5,36 @@ import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 const STEPS = [
-  { label: "Preparação", src: "/portfolio/full/cobertura-eventos-rave/001-mg-3645.webp" },
-  { label: "Operação de câmera", src: "/portfolio/full/cobertura-eventos-rave/007-mg-9234.webp" },
-  { label: "Direção", src: "/portfolio/full/retratos-stephanie-lima-ufscar/025-img-8267.webp" },
-  { label: "Edição & Resultado", src: "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/055-mg-2168-aprimorado-nr.webp" },
+  {
+    label: "Filmagem · Eventos ao vivo",
+    src: "/portfolio/full/cobertura-eventos-rave/003-mg-3648.webp",
+    description: "Câmera dentro do acontecimento. Registro de perto, sem ensaio, sem segunda chance.",
+  },
+  {
+    label: "Drone · Perspectiva aérea",
+    src: "/portfolio/full/cidade-em-foco/005-eduardo-0270.webp",
+    description: "Voo planejado, imagem que contextualiza. Onde o evento acontece vira parte da narrativa.",
+  },
+  {
+    label: "Empresas · Cobertura automotiva",
+    src: "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/055-mg-2168-aprimorado-nr.webp",
+    description: "Produto, detalhe e atmosfera da marca. Cada quadro comunica identidade para quem ainda não conhece.",
+  },
+  {
+    label: "Workshop · Bastidores de processo",
+    src: "/portfolio/full/cobertura-eventos-workshop-joseph-pura-arte-tatto/035-mg-4998.webp",
+    description: "O processo criativo de outros artistas registrado com a mesma intenção que o resultado final.",
+  },
+  {
+    label: "Retratos · Direção de presença",
+    src: "/portfolio/full/retratos-livia-lima-estacao/004-mg-8884.webp",
+    description: "Direção de luz e gesto. A pessoa não posa — existe no quadro.",
+  },
+  {
+    label: "Noite · Atmosfera e público",
+    src: "/portfolio/full/cobertura-eventos-rave/008-mg-9235.webp",
+    description: "Luz baixa, energia alta. Registro que mantém o impacto mesmo fora do momento.",
+  },
 ];
 
 export function DirectedBy() {
@@ -19,37 +45,43 @@ export function DirectedBy() {
     offset: ["start end", "end start"],
   });
 
-  const textY = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["12%", "-18%"]);
-  const titleScale = useTransform(scrollYProgress, [0.1, 0.55, 0.92], reduce ? [1, 1, 1] : [0.94, 1, 0.86]);
-  const bg = useTransform(scrollYProgress, [0, 0.25, 0.78, 1], ["#14120f", "#0b0a09", "#0b0a09", "#14120f"]);
+  const textY = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["10%", "-14%"]);
+  const titleScale = useTransform(scrollYProgress, [0.1, 0.5, 0.9], reduce ? [1, 1, 1] : [0.96, 1, 0.92]);
 
   return (
-    <motion.section ref={ref} className="relative w-full py-[14vh]" style={{ backgroundColor: bg }}>
+    <section ref={ref} className="relative w-full bg-charcoal py-[14vh]">
       <div className="grid grid-cols-1 gap-y-16 px-6 md:grid-cols-12 md:gap-x-8 md:px-12">
         {/* Sticky editorial column */}
         <div className="md:col-span-5">
-          <motion.div style={{ y: textY, scale: titleScale }} className="origin-left md:sticky md:top-[18vh]">
-            <p className="micro-label mb-8 text-muted-foreground">[ Processo ]</p>
+          <motion.div style={{ y: textY, scale: titleScale }} className="origin-left md:sticky md:top-[16vh]">
+            <p className="micro-label mb-8 text-muted-foreground">[ Direção criativa ]</p>
             <h2 className="font-display text-[13vw] leading-[0.85] text-cream md:text-[6vw]">
               Directed
               <br />
               by Magon
             </h2>
-            <p className="mt-8 max-w-md font-serif text-2xl italic leading-snug text-cream/75 md:text-3xl">
-              Direção, fotografia e construção visual. Do primeiro enquadramento
-              à entrega final.
-            </p>
+            <div className="mt-10 space-y-6 max-w-md">
+              <p className="font-serif text-2xl italic leading-snug text-cream/75 md:text-3xl">
+                Filmagem, drone, cobertura para marcas e eventos. Direção que conecta câmera ao que importa.
+              </p>
+              <p className="text-lg leading-relaxed text-cream/55">
+                Cada produção começa pela intenção: o que esse registro precisa comunicar. De voo de drone ao retrato de perto — o enquadramento serve a história, não ao equipamento.
+              </p>
+              <p className="text-lg leading-relaxed text-cream/55">
+                Cobrimos desde a preparação do palco até a entrega de galeria. Empresa, evento ou projeto pessoal — a direção criativa é a mesma: presente, intencional e construída para ser lembrada.
+              </p>
+            </div>
           </motion.div>
         </div>
 
-        {/* Asymmetric image column */}
-        <div className="editorial-mask-soft flex flex-col gap-[10vh] md:col-span-7 md:pt-[10vh]">
+        {/* Image column — diversity of work */}
+        <div className="editorial-mask-soft flex flex-col gap-[8vh] md:col-span-7 md:pt-[8vh]">
           {STEPS.map((step, i) => (
             <ParallaxImage key={step.label} step={step} offset={i} />
           ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
 
@@ -57,7 +89,7 @@ function ParallaxImage({
   step,
   offset,
 }: {
-  step: { label: string; src: string };
+  step: { label: string; src: string; description: string };
   offset: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -67,40 +99,45 @@ function ParallaxImage({
     offset: ["start end", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.55, 1], reduce ? [1, 1, 1] : [1.18, 1, 1.08]);
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["-8%", "7%"]);
+  const scale = useTransform(scrollYProgress, [0, 0.55, 1], reduce ? [1, 1, 1] : [1.12, 1, 1.05]);
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["-6%", "5%"]);
   const clip = useTransform(
     scrollYProgress,
-    [0, 0.35, 0.8, 1],
+    [0, 0.32, 0.82, 1],
     reduce
       ? ["inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]
-      : ["inset(35% 8% 30% 8%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(22% 0% 22% 0%)"],
+      : ["inset(28% 6% 24% 6%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(18% 0% 18% 0%)"],
   );
-  const rotate = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? [0, 0, 0] : [offset % 2 === 0 ? -2 : 2, 0, offset % 2 === 0 ? 1.5 : -1.5]);
+  const opacity = useTransform(scrollYProgress, [0, 0.18, 0.88, 1], [0.3, 1, 1, 0.4]);
 
-  // Alternate left/right offset for asymmetric split-screen rhythm.
-  const shift = offset % 2 === 0 ? "md:-ml-10 md:mr-20" : "md:ml-20 md:-mr-6";
-  const ratio = offset === 1 ? "aspect-[4/5]" : offset === 2 ? "aspect-[16/9]" : "aspect-[16/10]";
+  const shift = offset % 2 === 0 ? "md:-ml-6 md:mr-16" : "md:ml-16 md:-mr-4";
+  const ratio = offset % 3 === 0 ? "aspect-[16/10]" : offset % 3 === 1 ? "aspect-[4/5]" : "aspect-[16/9]";
 
   return (
-    <div ref={ref} className={`relative ${shift}`}>
+    <motion.div ref={ref} style={{ opacity }} className={`relative ${shift}`}>
       <motion.div
-        style={{ clipPath: clip, rotate }}
+        style={{ clipPath: clip }}
         className={`relative ${ratio} w-full overflow-hidden bg-charcoal-soft`}
       >
         <motion.div style={{ scale, y }} className="h-full w-full">
           <Image
-            src={step.src || "/placeholder.svg"}
-            alt={`Bastidores Magon — ${step.label}`}
+            src={step.src}
+            alt={`Magon — ${step.label}`}
             fill
             sizes="(max-width: 768px) 100vw, 55vw"
             className="object-cover"
           />
         </motion.div>
-        <span className="micro-label absolute bottom-4 left-4 text-cream">
-          {String(offset + 1).padStart(2, "0")} · {step.label}
-        </span>
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 p-5">
+          <span className="micro-label text-cream">
+            {String(offset + 1).padStart(2, "0")} · {step.label}
+          </span>
+          <p className="mt-2 max-w-sm text-sm leading-snug text-cream/65">
+            {step.description}
+          </p>
+        </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
