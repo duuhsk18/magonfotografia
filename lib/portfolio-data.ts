@@ -26,7 +26,7 @@ export const portfolioGalleries = [
     "category": "Cidade em Foco",
     "sourcePath": "CIDADE EM FOCO",
     "count": 9,
-    "cover": "/portfolio/full/cidade-em-foco/001-eduardo-06.webp",
+    "cover": "/portfolio/full/cidade-em-foco/005-eduardo-0270.webp",
     "photos": [
       {
         "id": "cidade-em-foco-001-eduardo-06",
@@ -126,7 +126,7 @@ export const portfolioGalleries = [
     "category": "Cobertura Eventos",
     "sourcePath": "COBERTURA EVENTOS  /  AUTOMOBILISTICOS - CARROS, EXPOSIÇÕES  /  EXPOCAR  /  expor com logo",
     "count": 109,
-    "cover": "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/001-mg-2042.webp",
+    "cover": "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/027-mg-2096.webp",
     "photos": [
       {
         "id": "cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo-001-mg-2042",
@@ -1626,7 +1626,7 @@ export const portfolioGalleries = [
     "category": "Cobertura Eventos",
     "sourcePath": "COBERTURA EVENTOS  /  WORKSHOP JOSEPH - PURA ARTE TATTO",
     "count": 66,
-    "cover": "/portfolio/full/cobertura-eventos-workshop-joseph-pura-arte-tatto/001-mg-4880.webp",
+    "cover": "/portfolio/full/cobertura-eventos-workshop-joseph-pura-arte-tatto/014-mg-4938.webp",
     "photos": [
       {
         "id": "cobertura-eventos-workshop-joseph-pura-arte-tatto-001-mg-4880",
@@ -2846,7 +2846,7 @@ export const portfolioGalleries = [
     "category": "Retratos",
     "sourcePath": "RETRATOS  /  STEPHANIE LIMA - UFSCAR",
     "count": 67,
-    "cover": "/portfolio/full/retratos-stephanie-lima-ufscar/001-img-8164.webp",
+    "cover": "/portfolio/full/retratos-stephanie-lima-ufscar/030-img-8280.webp",
     "photos": [
       {
         "id": "retratos-stephanie-lima-ufscar-001-img-8164",
