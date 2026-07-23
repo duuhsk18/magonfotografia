@@ -6,7 +6,6 @@ import { projects } from "@/lib/projects";
 import { BrandMark } from "@/components/brand-mark";
 import { MediaFrame } from "@/components/media-frame";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { CustomCursor } from "@/components/custom-cursor";
 import { Footer } from "@/components/footer";
 
 export default function ProjectPage() {
@@ -34,7 +33,6 @@ export default function ProjectPage() {
   return (
     <>
       <SmoothScroll />
-      <CustomCursor />
       <main className="w-full bg-charcoal">
         {/* Top bar */}
         <div className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-5 md:px-12">

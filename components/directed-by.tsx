@@ -5,10 +5,10 @@ import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 const STEPS = [
-  { label: "Preparação", src: "/behind-scenes-1.png" },
-  { label: "Operação de câmera", src: "/media/behind-03.png" },
-  { label: "Direção", src: "/behind-scenes-2.png" },
-  { label: "Edição & Resultado", src: "/media/behind-04.png" },
+  { label: "Preparação", src: "/portfolio/full/cobertura-eventos-rave/001-mg-3645.webp" },
+  { label: "Operação de câmera", src: "/portfolio/full/cobertura-eventos-rave/007-mg-9234.webp" },
+  { label: "Direção", src: "/portfolio/full/retratos-stephanie-lima-ufscar/025-img-8267.webp" },
+  { label: "Edição & Resultado", src: "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/055-mg-2168-aprimorado-nr.webp" },
 ];
 
 export function DirectedBy() {

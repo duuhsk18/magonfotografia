@@ -6,13 +6,15 @@ import Lenis from "lenis";
 export function SmoothScroll() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    const touch = window.matchMedia("(pointer: coarse)").matches;
+    if (reduce || touch) return;
 
     const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 0.72,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
       smoothWheel: true,
-      touchMultiplier: 1.6,
+      touchMultiplier: 1,
+      wheelMultiplier: 0.85,
     });
 
     let rafId: number;

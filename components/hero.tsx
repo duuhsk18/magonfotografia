@@ -40,10 +40,9 @@ export function Hero() {
           style={{ scale: mediaScale, y: mediaY, clipPath: mediaClip }}
         >
           <MediaFrame
-            poster="/media/hero-poster.png"
+            poster="/portfolio/full/cobertura-eventos-rave/003-mg-3648.webp"
             alt="Cena cinematográfica de show ao vivo captada pela Magon"
             priority
-            placeholder
             sizes="100vw"
           />
         </motion.div>

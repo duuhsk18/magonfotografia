@@ -53,7 +53,7 @@ export function Services() {
         >
           <div className="relative h-full w-full overflow-hidden border-l border-border">
             <Image
-              src="/projects/culture-project.png"
+              src="/portfolio/full/retratos-adriele-fernandes-estacao-rodoviaria/010-094.webp"
               alt=""
               fill
               sizes="34vw"

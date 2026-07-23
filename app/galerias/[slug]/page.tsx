@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
-import { CustomCursor } from "@/components/custom-cursor";
 import { Footer } from "@/components/footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { getPortfolioGallery, portfolioGalleries } from "@/lib/portfolio-data";
@@ -26,7 +25,6 @@ export default function GalleryPage() {
   return (
     <>
       <SmoothScroll />
-      <CustomCursor />
       <main className="min-h-screen bg-charcoal text-cream">
         <div className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-5 md:px-12">
           <Link href="/#galerias" className="focus-ring micro-label text-cream mix-blend-difference">
