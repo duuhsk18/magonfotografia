@@ -5,7 +5,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { BrandMark } from "@/components/brand-mark";
 
 const WHATSAPP = "https://wa.me/5516999942889?text=Ol%C3%A1%2C%20quero%20iniciar%20um%20projeto%20com%20a%20Magon";
-const EMAIL = "mailto:contato@magonfotografia.com";
+const EMAIL = "mailto:contato@magonfotografia.com.br";
 const INSTAGRAM = "https://instagram.com/magonfotografia";
 
 export function CTA() {
@@ -45,7 +45,7 @@ export function CTA() {
 
         <div className="mt-14 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
           <MagneticLink href={WHATSAPP} text="WhatsApp · (16) 99994-2889" primary />
-          <MagneticLink href={EMAIL} text="contato@magonfotografia.com" />
+          <MagneticLink href={EMAIL} text="contato@magonfotografia.com.br" />
           <MagneticLink href={INSTAGRAM} text="@magonfotografia" />
         </div>
       </motion.div>

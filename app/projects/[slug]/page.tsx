@@ -9,7 +9,7 @@ import { Footer } from "@/components/footer";
 import { ProjectSlideshow } from "@/components/project-slideshow";
 
 const WHATSAPP = "https://wa.me/5516999942889?text=Ol%C3%A1%2C%20quero%20iniciar%20um%20projeto%20com%20a%20Magon";
-const EMAIL = "mailto:contato@magonfotografia.com";
+const EMAIL = "mailto:contato@magonfotografia.com.br";
 const INSTAGRAM = "https://instagram.com/magonfotografia";
 
 export default function ProjectPage() {
@@ -114,7 +114,7 @@ export default function ProjectPage() {
               href={EMAIL}
               className="focus-ring inline-flex items-center gap-3 border border-border px-8 py-5 text-base font-medium text-cream transition hover:border-cream"
             >
-              contato@magonfotografia.com <span>→</span>
+              contato@magonfotografia.com.br <span>→</span>
             </a>
             <a
               href={INSTAGRAM}
