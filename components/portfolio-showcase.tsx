@@ -2,98 +2,93 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 const portfolioItems = [
   {
-    src: "/portfolio/eventos-rave-mg-3648.webp",
+    src: "/portfolio/full/cobertura-eventos-rave/003-mg-3648.webp",
     label: "Eventos",
     meta: "Cobertura · energia · presença",
     position: "center 48%",
+    gallery: "/galerias/cobertura-eventos-rave",
   },
   {
-    src: "/portfolio/eventos-rave-mg-9283.webp",
-    label: "Eventos",
-    meta: "Luz · movimento · atmosfera",
-    position: "center 38%",
-  },
-  {
-    src: "/portfolio/retratos-livia-mg-8884.webp",
+    src: "/portfolio/full/retratos-livia-lima-estacao/004-mg-8884.webp",
     label: "Retratos",
     meta: "Direção · presença · silêncio",
     position: "center 22%",
+    gallery: "/galerias/retratos-livia-lima-estacao",
   },
   {
-    src: "/portfolio/retratos-stephanie-img-8298.webp",
+    src: "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/055-mg-2168-aprimorado-nr.webp",
+    label: "Automotivo",
+    meta: "Detalhe · marca · produto",
+    position: "center 45%",
+    gallery: "/galerias/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo",
+  },
+  {
+    src: "/portfolio/full/cobertura-eventos-workshop-joseph-pura-arte-tatto/035-mg-4998.webp",
+    label: "Workshop",
+    meta: "Processo · bastidores · arte",
+    position: "center 38%",
+    gallery: "/galerias/cobertura-eventos-workshop-joseph-pura-arte-tatto",
+  },
+  {
+    src: "/portfolio/full/retratos-stephanie-lima-ufscar/025-img-8267.webp",
     label: "Retratos",
     meta: "Editorial · pessoa · lugar",
     position: "center 20%",
+    gallery: "/galerias/retratos-stephanie-lima-ufscar",
   },
   {
-    src: "/portfolio/retratos-giovana-mg-3063x.webp",
+    src: "/portfolio/full/cidade-em-foco/005-eduardo-0270.webp",
+    label: "Cidade",
+    meta: "Drone · paisagem · perspectiva",
+    position: "center 50%",
+    gallery: "/galerias/cidade-em-foco",
+  },
+  {
+    src: "/portfolio/full/cobertura-eventos-rave/008-mg-9235.webp",
+    label: "Eventos",
+    meta: "Atmosfera · público · noite",
+    position: "center 36%",
+    gallery: "/galerias/cobertura-eventos-rave",
+  },
+  {
+    src: "/portfolio/full/retratos-giovana-profit-ufscar-sul/001-mg-3063x.webp",
     label: "Retratos",
     meta: "Corpo · paisagem · identidade",
     position: "center 34%",
+    gallery: "/galerias/retratos-giovana-profit-ufscar-sul",
   },
   {
-    src: "/portfolio/eventos-rave-mg-3654.webp",
+    src: "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/010-mg-2067.webp",
+    label: "Automotivo",
+    meta: "Exposição · atmosfera · marca",
+    position: "center 42%",
+    gallery: "/galerias/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo",
+  },
+  {
+    src: "/portfolio/full/cobertura-eventos-workshop-joseph-pura-arte-tatto/012-mg-4936.webp",
+    label: "Workshop",
+    meta: "Tatuagem · detalhe · criação",
+    position: "center 40%",
+    gallery: "/galerias/cobertura-eventos-workshop-joseph-pura-arte-tatto",
+  },
+  {
+    src: "/portfolio/full/retratos-adriele-fernandes-estacao-rodoviaria/005-062.webp",
+    label: "Retratos",
+    meta: "Retrato · estação · presença",
+    position: "center 22%",
+    gallery: "/galerias/retratos-adriele-fernandes-estacao-rodoviaria",
+  },
+  {
+    src: "/portfolio/full/cobertura-eventos-rave/006-mg-9231-2.webp",
     label: "Eventos",
-    meta: "Cobertura · luz · noite",
+    meta: "Luz · energia · movimento",
     position: "center 35%",
-  },
-  {
-    src: "/portfolio/eventos-rave-mg-9235.webp",
-    label: "Eventos",
-    meta: "Atmosfera · público · intensidade",
-    position: "center 36%",
-  },
-  {
-    src: "/portfolio/retratos-livia-mg-8880.webp",
-    label: "Retratos",
-    meta: "Retrato · gesto · presença",
-    position: "center 22%",
-  },
-  {
-    src: "/portfolio/retratos-livia-mg-8899.webp",
-    label: "Retratos",
-    meta: "Ensaio · estação · direção",
-    position: "center 24%",
-  },
-  {
-    src: "/portfolio/retratos-stephanie-img-8267.webp",
-    label: "Retratos",
-    meta: "Retrato · UFSCar · editorial",
-    position: "center 22%",
-  },
-  {
-    src: "/portfolio/retratos-stephanie-img-8310.webp",
-    label: "Retratos",
-    meta: "Editorial · movimento · campus",
-    position: "center 20%",
-  },
-  {
-    src: "/portfolio/retratos-adriele-026.webp",
-    label: "Retratos",
-    meta: "Retrato · estação · cidade",
-    position: "center 42%",
-  },
-  {
-    src: "/portfolio/retratos-adriele-082x.webp",
-    label: "Retratos",
-    meta: "Direção · olhar · textura",
-    position: "center 22%",
-  },
-  {
-    src: "/portfolio/retratos-giovana-mg-3141.webp",
-    label: "Retratos",
-    meta: "Paisagem · corpo · luz",
-    position: "center 42%",
-  },
-  {
-    src: "/portfolio/retratos-giovana-mg-3232-1x.webp",
-    label: "Retratos",
-    meta: "Retrato · natureza · presença",
-    position: "center 42%",
+    gallery: "/galerias/cobertura-eventos-rave",
   },
 ];
 
@@ -112,7 +107,7 @@ export function PortfolioShowcase() {
     if (reduce || isAutoPaused) return;
     const id = window.setInterval(() => {
       setActive((current) => (current + 1) % portfolioItems.length);
-    }, 3200);
+    }, 2800);
     return () => window.clearInterval(id);
   }, [isAutoPaused, reduce]);
 
@@ -132,12 +127,18 @@ export function PortfolioShowcase() {
             em cena
           </h2>
           <p className="mt-8 max-w-sm font-serif text-2xl italic leading-snug text-cream/70 md:text-3xl">
-            Uma amostra visual do trabalho: eventos, retratos e imagens dirigidas para serem lembradas.
+            Uma amostra visual do trabalho: eventos, retratos, workshops, coberturas automotivas e imagens aéreas.
           </p>
+          <Link
+            href="/#galerias"
+            className="focus-ring mt-10 inline-flex items-center gap-3 border border-border px-6 py-4 text-base font-medium text-cream transition hover:border-cream"
+          >
+            Ver todas as galerias <span className="transition-transform group-hover:translate-x-1">→</span>
+          </Link>
         </motion.div>
 
         <div className="md:col-span-8">
-          <div className="relative min-h-[78svh] overflow-hidden bg-charcoal-soft">
+          <Link href={activeItem.gallery} className="focus-ring relative block min-h-[78svh] overflow-hidden bg-charcoal-soft">
             <motion.div
               key={activeItem.src}
               className="absolute inset-0"
@@ -169,7 +170,7 @@ export function PortfolioShowcase() {
                 <p className="micro-label max-w-xs text-cream/70 md:text-right">{activeItem.meta}</p>
               </div>
             </div>
-          </div>
+          </Link>
 
           <motion.div style={{ x: railX }} className="mt-8 flex gap-4 overflow-hidden">
             {portfolioItems.map((item, index) => (

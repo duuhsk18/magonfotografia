@@ -7,8 +7,7 @@ export interface Project {
   city: string;
   year: number;
   media: string;
-  /** Marks whether the intended primary media is a video that still needs to be supplied. */
-  videoPlaceholder?: boolean;
+  mediaSlides: string[];
   description: string;
   fullDescription: string;
   credits?: string;
@@ -24,7 +23,13 @@ export const projects: Project[] = [
     city: "São Carlos — SP",
     year: 2026,
     media: "/portfolio/full/cobertura-eventos-rave/003-mg-3648.webp",
-    videoPlaceholder: false,
+    mediaSlides: [
+      "/portfolio/full/cobertura-eventos-rave/003-mg-3648.webp",
+      "/portfolio/full/cobertura-eventos-rave/008-mg-9235.webp",
+      "/portfolio/full/cobertura-eventos-rave/006-mg-9231-2.webp",
+      "/portfolio/full/cobertura-eventos-rave/005-mg-3654.webp",
+      "/portfolio/full/cobertura-eventos-rave/007-mg-9234.webp",
+    ],
     description: "Cobertura cinematográfica de show ao vivo com direção visual completa.",
     fullDescription:
       "Uma produção que captura a energia bruta de um show ao vivo. Direção de fotografia e movimento que acompanha cada beat, cada expressão, cada momento de conexão entre artista e público. Luz, movimento e emoção transformados em quadros que continuam vivos depois do último acorde.",
@@ -39,7 +44,13 @@ export const projects: Project[] = [
     city: "São Carlos — SP",
     year: 2026,
     media: "/portfolio/full/retratos-livia-lima-estacao/004-mg-8884.webp",
-    videoPlaceholder: false,
+    mediaSlides: [
+      "/portfolio/full/retratos-livia-lima-estacao/004-mg-8884.webp",
+      "/portfolio/full/retratos-stephanie-lima-ufscar/025-img-8267.webp",
+      "/portfolio/full/retratos-giovana-profit-ufscar-sul/001-mg-3063x.webp",
+      "/portfolio/full/retratos-adriele-fernandes-estacao-rodoviaria/005-062.webp",
+      "/portfolio/full/retratos-livia-lima-estacao/001-mg-8880.webp",
+    ],
     description: "Série editorial de retratos de artistas e personalidades.",
     fullDescription:
       "Um retrato bom é aquele que revela algo que a pessoa não sabe sobre si mesma. Esta série captura essência: a força, a fragilidade, a verdade que existe no silêncio entre as palavras. Direção de luz e presença construídas quadro a quadro.",
@@ -54,7 +65,13 @@ export const projects: Project[] = [
     city: "São Carlos — SP",
     year: 2026,
     media: "/portfolio/full/cobertura-eventos-workshop-joseph-pura-arte-tatto/008-mg-4920.webp",
-    videoPlaceholder: false,
+    mediaSlides: [
+      "/portfolio/full/cobertura-eventos-workshop-joseph-pura-arte-tatto/008-mg-4920.webp",
+      "/portfolio/full/cobertura-eventos-workshop-joseph-pura-arte-tatto/035-mg-4998.webp",
+      "/portfolio/full/cobertura-eventos-workshop-joseph-pura-arte-tatto/012-mg-4936.webp",
+      "/portfolio/full/cobertura-eventos-rave/001-mg-3645.webp",
+      "/portfolio/full/cobertura-eventos-workshop-joseph-pura-arte-tatto/050-mg-5044.webp",
+    ],
     description: "Cobertura completa de evento cultural e coletivo.",
     fullDescription:
       "Documentar é registrar. Criar é contar histórias. Nossa cobertura vai além: captamos atmosfera, energia e conexões e transformamos tudo em narrativa visual. O coletivo em movimento, a cultura em cena, a memória construída em tempo real.",
@@ -69,7 +86,13 @@ export const projects: Project[] = [
     city: "São Carlos — SP",
     year: 2026,
     media: "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/010-mg-2067.webp",
-    videoPlaceholder: false,
+    mediaSlides: [
+      "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/010-mg-2067.webp",
+      "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/055-mg-2168-aprimorado-nr.webp",
+      "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/001-mg-2042.webp",
+      "/portfolio/full/cobertura-eventos-automobilisticos-carros-exposicoes-expocar-expor-com-logo/090-mg-2257.webp",
+      "/portfolio/full/cidade-em-foco/007-eduardo-0334.webp",
+    ],
     description: "Conteúdo visual estratégico para marca contemporânea.",
     fullDescription:
       "Criamos identidade visual para marcas que entendem que imagem é estratégia. Cada quadro é um capítulo na história da marca, construindo presença, valor e reconhecimento. Direção visual que transforma negócios em algo percebido.",

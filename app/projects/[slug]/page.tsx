@@ -61,7 +61,6 @@ export default function ProjectPage() {
           <MediaFrame
             poster={project.media}
             alt={`${project.title} — ${project.category}`}
-            placeholder={project.videoPlaceholder}
             priority
             sizes="100vw"
           />

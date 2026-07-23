@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { projects, type Project } from "@/lib/projects";
-import { MediaFrame } from "@/components/media-frame";
 
 export function FeaturedWorks() {
   return (
@@ -102,12 +102,7 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
         >
           <motion.div style={{ clipPath: clip }} className="media-grain absolute inset-0">
             <motion.div style={{ scale: mediaScale, y: mediaY }} className="h-full w-full">
-              <MediaFrame
-                poster={project.media}
-                alt={`${project.title} — ${project.category}`}
-                placeholder={project.videoPlaceholder}
-                sizes="(max-width: 768px) 100vw, 1400px"
-              />
+              <ProjectSlideshow slides={project.mediaSlides} alt={`${project.title} — ${project.category}`} />
             </motion.div>
             <div className="absolute inset-0 bg-gradient-to-t from-charcoal/88 via-charcoal/10 to-charcoal/35" />
           </motion.div>
@@ -140,6 +135,32 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
           </div>
         </Link>
       </motion.div>
+    </div>
+  );
+}
+
+function ProjectSlideshow({ slides, alt }: { slides: string[]; alt: string }) {
+  const [current, setCurrent] = useState(0);
+  const reduce = useReducedMotion();
+
+  useEffect(() => {
+    if (reduce || slides.length <= 1) return;
+    const id = window.setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 2600);
+    return () => window.clearInterval(id);
+  }, [reduce, slides.length]);
+
+  return (
+    <div className="relative h-full w-full overflow-hidden bg-charcoal-soft">
+      <Image
+        key={slides[current]}
+        src={slides[current]}
+        alt={alt}
+        fill
+        sizes="(max-width: 768px) 100vw, 1400px"
+        className="object-cover transition-opacity duration-700"
+      />
     </div>
   );
 }
