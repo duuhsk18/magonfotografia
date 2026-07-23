@@ -1,18 +1,22 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 const WHATSAPP = "https://wa.me/5516999999999?text=Ol%C3%A1%2C%20quero%20iniciar%20um%20projeto%20com%20a%20Magon";
 const EMAIL = "mailto:contato@magon.com.br";
 
 export function CTA() {
   const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["12%", "-12%"]);
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["16%", "-18%"]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? [1, 1, 1] : [0.9, 1, 0.92]);
+  const bgScale = useTransform(scrollYProgress, [0, 0.72], reduce ? [1, 1] : [0.88, 1]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.35, 1], [0, 0.2, 0]);
 
   return (
     <section
@@ -20,7 +24,12 @@ export function CTA() {
       id="contato"
       className="relative flex min-h-svh w-full flex-col justify-center overflow-hidden bg-charcoal px-6 py-[16vh] md:px-12"
     >
-      <motion.div style={{ y }}>
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-x-6 top-1/2 h-[46vh] -translate-y-1/2 border border-cream/30 md:inset-x-12"
+        style={{ scaleX: bgScale, opacity: bgOpacity }}
+      />
+      <motion.div style={{ y, scale }} className="relative z-10 origin-left">
         <h2 className="font-display text-[18vw] leading-[0.82] text-warm-white md:text-[13vw]">
           Tem algo
           <br />
@@ -51,8 +60,10 @@ function MagneticLink({
   primary?: boolean;
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
+  const reduce = useReducedMotion();
 
   const handleMove = (e: React.MouseEvent) => {
+    if (reduce) return;
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -75,7 +86,7 @@ function MagneticLink({
       onMouseLeave={reset}
       data-cursor
       data-cursor-text={text}
-      className={`group inline-flex items-center gap-3 px-8 py-5 text-base font-medium tracking-wide transition-colors duration-300 will-change-transform ${
+      className={`focus-ring group inline-flex items-center gap-3 px-8 py-5 text-base font-medium tracking-wide transition-colors duration-300 will-change-transform ${
         primary
           ? "bg-cream text-charcoal hover:bg-warm-white"
           : "border border-border text-cream hover:border-cream"

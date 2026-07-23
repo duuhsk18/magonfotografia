@@ -10,9 +10,11 @@ export function Preloader() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      setCount(100);
-      setDone(true);
-      return;
+      const doneId = requestAnimationFrame(() => {
+        setCount(100);
+        setDone(true);
+      });
+      return () => cancelAnimationFrame(doneId);
     }
 
     document.body.style.overflow = "hidden";

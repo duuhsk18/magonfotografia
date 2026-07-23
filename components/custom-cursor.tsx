@@ -18,7 +18,7 @@ export function CustomCursor() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!fine || reduce) return;
 
-    setEnabled(true);
+    const enableId = requestAnimationFrame(() => setEnabled(true));
     document.documentElement.classList.add("custom-cursor-active");
 
     const move = (e: MouseEvent) => {
@@ -42,6 +42,7 @@ export function CustomCursor() {
     window.addEventListener("mouseover", over);
 
     return () => {
+      cancelAnimationFrame(enableId);
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mouseover", over);
       document.documentElement.classList.remove("custom-cursor-active");

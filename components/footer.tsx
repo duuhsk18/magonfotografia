@@ -59,7 +59,7 @@ function FooterLink({
         : {})}
       data-cursor
       data-cursor-text={label}
-      className="group flex items-center gap-2 text-cream transition-colors hover:text-warm-white"
+      className="focus-ring group flex items-center gap-2 text-cream transition-colors hover:text-warm-white"
     >
       <span className="text-lg">{label}</span>
       <span className="text-muted-foreground transition-transform duration-300 group-hover:translate-x-1">

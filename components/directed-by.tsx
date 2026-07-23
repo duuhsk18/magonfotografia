@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 const STEPS = [
   { label: "Preparação", src: "/behind-scenes-1.png" },
@@ -13,19 +13,22 @@ const STEPS = [
 
 export function DirectedBy() {
   const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const textY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["12%", "-18%"]);
+  const titleScale = useTransform(scrollYProgress, [0.1, 0.55, 0.92], reduce ? [1, 1, 1] : [0.94, 1, 0.86]);
+  const bg = useTransform(scrollYProgress, [0, 0.25, 0.78, 1], ["#14120f", "#0b0a09", "#0b0a09", "#14120f"]);
 
   return (
-    <section ref={ref} className="relative w-full bg-charcoal py-[14vh]">
+    <motion.section ref={ref} className="relative w-full py-[14vh]" style={{ backgroundColor: bg }}>
       <div className="grid grid-cols-1 gap-y-16 px-6 md:grid-cols-12 md:gap-x-8 md:px-12">
         {/* Sticky editorial column */}
         <div className="md:col-span-5">
-          <motion.div style={{ y: textY }} className="md:sticky md:top-[18vh]">
+          <motion.div style={{ y: textY, scale: titleScale }} className="origin-left md:sticky md:top-[18vh]">
             <p className="micro-label mb-8 text-muted-foreground">[ Processo ]</p>
             <h2 className="font-display text-[13vw] leading-[0.85] text-cream md:text-[6vw]">
               Directed
@@ -40,13 +43,13 @@ export function DirectedBy() {
         </div>
 
         {/* Asymmetric image column */}
-        <div className="flex flex-col gap-6 md:col-span-7">
+        <div className="editorial-mask-soft flex flex-col gap-[10vh] md:col-span-7 md:pt-[10vh]">
           {STEPS.map((step, i) => (
             <ParallaxImage key={step.label} step={step} offset={i} />
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -58,28 +61,34 @@ function ParallaxImage({
   offset: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1.15, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.55, 1], reduce ? [1, 1, 1] : [1.18, 1, 1.08]);
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["-8%", "7%"]);
   const clip = useTransform(
     scrollYProgress,
-    [0, 0.45],
-    ["inset(30% 0% 30% 0%)", "inset(0% 0% 0% 0%)"],
+    [0, 0.35, 0.8, 1],
+    reduce
+      ? ["inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]
+      : ["inset(35% 8% 30% 8%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(22% 0% 22% 0%)"],
   );
+  const rotate = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? [0, 0, 0] : [offset % 2 === 0 ? -2 : 2, 0, offset % 2 === 0 ? 1.5 : -1.5]);
 
   // Alternate left/right offset for asymmetric split-screen rhythm.
-  const shift = offset % 2 === 0 ? "md:ml-0 md:mr-16" : "md:ml-16 md:mr-0";
+  const shift = offset % 2 === 0 ? "md:-ml-10 md:mr-20" : "md:ml-20 md:-mr-6";
+  const ratio = offset === 1 ? "aspect-[4/5]" : offset === 2 ? "aspect-[16/9]" : "aspect-[16/10]";
 
   return (
     <div ref={ref} className={`relative ${shift}`}>
       <motion.div
-        style={{ clipPath: clip }}
-        className="relative aspect-[16/10] w-full overflow-hidden bg-charcoal-soft"
+        style={{ clipPath: clip, rotate }}
+        className={`relative ${ratio} w-full overflow-hidden bg-charcoal-soft`}
       >
-        <motion.div style={{ scale }} className="h-full w-full">
+        <motion.div style={{ scale, y }} className="h-full w-full">
           <Image
             src={step.src || "/placeholder.svg"}
             alt={`Bastidores Magon — ${step.label}`}

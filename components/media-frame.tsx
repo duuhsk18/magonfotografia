@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 
 interface MediaFrameProps {
@@ -60,6 +60,7 @@ export function MediaFrame({
           loop
           playsInline
           preload="metadata"
+          aria-label={alt}
         >
           <source src={videoSrc} type="video/mp4" />
         </video>

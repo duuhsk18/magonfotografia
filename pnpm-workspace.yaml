@@ -1,0 +1,11 @@
+packages:
+  - .
+
+catalogs: {}
+
+overrides:
+  hono: 4.12.25
+
+onlyBuiltDependencies:
+  - sharp
+  - msw
