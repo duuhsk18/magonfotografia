@@ -1,3 +1,5 @@
+export type MediaSlide = string | { type: "video"; src: string; poster: string; alt: string };
+
 export interface Project {
   id: string;
   index: string;
@@ -7,7 +9,7 @@ export interface Project {
   city: string;
   year: number;
   media: string;
-  mediaSlides: string[];
+  mediaSlides: MediaSlide[];
   description: string;
   fullDescription: string;
   credits?: string;
@@ -25,10 +27,10 @@ export const projects: Project[] = [
     media: "/portfolio/full/cobertura-eventos-rave/003-mg-3648.webp",
     mediaSlides: [
       "/portfolio/full/cobertura-eventos-rave/003-mg-3648.webp",
+      "/portfolio/full/cobertura-eventos-rave/001-mg-3645.webp",
+      { type: "video", src: "/portfolio/becker-edit.mp4", poster: "/portfolio/full/cobertura-eventos-rave/003-mg-3648.webp", alt: "BECKER EDIT — Show in Motion" },
       "/portfolio/full/cobertura-eventos-rave/008-mg-9235.webp",
       "/portfolio/full/cobertura-eventos-rave/006-mg-9231-2.webp",
-      "/portfolio/full/cobertura-eventos-rave/005-mg-3654.webp",
-      "/portfolio/full/cobertura-eventos-rave/007-mg-9234.webp",
     ],
     description: "Cobertura cinematográfica de show ao vivo com direção visual completa.",
     fullDescription:

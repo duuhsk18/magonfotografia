@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { projects, type Project } from "@/lib/projects";
+import { projects, type Project, type MediaSlide } from "@/lib/projects";
 
 export function FeaturedWorks() {
   return (
@@ -139,26 +139,48 @@ function ProjectPanel({ project, position }: { project: Project; position: numbe
   );
 }
 
-function ProjectSlideshow({ slides, alt }: { slides: string[]; alt: string }) {
+function ProjectSlideshow({ slides, alt }: { slides: MediaSlide[]; alt: string }) {
   const [current, setCurrent] = useState(0);
   const reduce = useReducedMotion();
-  const isPortraitSet = slides[current]?.includes("/retratos-");
+  const slide = slides[current];
+  const isVideo = typeof slide !== "string" && slide?.type === "video";
+  const imageSrc = typeof slide === "string" ? slide : slide?.poster ?? "";
+  const isPortraitSet = imageSrc.includes("/retratos-");
   const imageFit = isPortraitSet ? "object-contain" : "object-cover";
-  const imagePosition = isPortraitSet ? "center 18%" : "center center";
+  const imagePosition = isPortraitSet ? "center 18%" : "center 38%";
 
   useEffect(() => {
     if (reduce || slides.length <= 1) return;
+    const duration = isVideo ? 6000 : 2600;
     const id = window.setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 2600);
+    }, duration);
     return () => window.clearInterval(id);
-  }, [reduce, slides.length]);
+  }, [reduce, slides.length, isVideo]);
+
+  if (isVideo && typeof slide !== "string") {
+    return (
+      <div className="relative h-full w-full overflow-hidden bg-charcoal-soft">
+        <video
+          key={slide.src}
+          src={slide.src}
+          poster={slide.poster}
+          autoPlay
+          muted
+          playsInline
+          loop
+          className="h-full w-full object-cover"
+          aria-label={slide.alt}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="relative h-full w-full overflow-hidden bg-charcoal-soft">
       <Image
-        key={slides[current]}
-        src={slides[current]}
+        key={imageSrc}
+        src={imageSrc}
         alt={alt}
         fill
         sizes="(max-width: 768px) 100vw, 1400px"
