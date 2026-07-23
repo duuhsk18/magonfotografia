@@ -5,11 +5,36 @@ import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 const slides = [
-  { src: "/portfolio/eventos-rave-mg-3648.webp", label: "Eventos", meta: "Cobertura · energia · presença" },
-  { src: "/portfolio/eventos-rave-mg-9283.webp", label: "Eventos", meta: "Luz · movimento · atmosfera" },
-  { src: "/portfolio/retratos-livia-mg-8884.webp", label: "Retratos", meta: "Direção · presença · silêncio" },
-  { src: "/portfolio/retratos-stephanie-img-8298.webp", label: "Retratos", meta: "Editorial · pessoa · lugar" },
-  { src: "/portfolio/retratos-giovana-mg-3063x.webp", label: "Retratos", meta: "Corpo · paisagem · identidade" },
+  {
+    src: "/portfolio/eventos-rave-mg-3648.webp",
+    label: "Eventos",
+    meta: "Cobertura · energia · presença",
+    position: "center 48%",
+  },
+  {
+    src: "/portfolio/eventos-rave-mg-9283.webp",
+    label: "Eventos",
+    meta: "Luz · movimento · atmosfera",
+    position: "center 38%",
+  },
+  {
+    src: "/portfolio/retratos-livia-mg-8884.webp",
+    label: "Retratos",
+    meta: "Direção · presença · silêncio",
+    position: "center 22%",
+  },
+  {
+    src: "/portfolio/retratos-stephanie-img-8298.webp",
+    label: "Retratos",
+    meta: "Editorial · pessoa · lugar",
+    position: "center 20%",
+  },
+  {
+    src: "/portfolio/retratos-giovana-mg-3063x.webp",
+    label: "Retratos",
+    meta: "Corpo · paisagem · identidade",
+    position: "center 34%",
+  },
 ];
 
 const gallery = [
@@ -73,6 +98,7 @@ export function PortfolioShowcase() {
                   fill
                   sizes="(max-width: 768px) 100vw, 66vw"
                   className="object-cover"
+                  style={{ objectPosition: slide.position }}
                   priority={index === 0}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/15 to-charcoal/35" />
