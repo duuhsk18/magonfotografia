@@ -1,15 +1,18 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
-const WORDS = [
-  "Não", "registramos", "apenas", "o", "que", "aconteceu.",
-  "Construímos", "a", "maneira", "como", "será", "lembrado.",
+const LINES = [
+  {
+    text: "Não registramos apenas o que aconteceu.",
+    emphasis: "registramos",
+  },
+  {
+    text: "Construímos a maneira como será lembrado.",
+    emphasis: "lembrado.",
+  },
 ];
-
-// Words rendered as outline for editorial contrast.
-const OUTLINE = new Set(["registramos", "lembrado."]);
 
 export function Manifesto() {
   const ref = useRef<HTMLElement>(null);
@@ -19,65 +22,101 @@ export function Manifesto() {
     offset: ["start end", "end start"],
   });
 
-  const background = useTransform(scrollYProgress, [0, 0.18, 0.82, 1], ["#0b0a09", "#e5ddca", "#e5ddca", "#0b0a09"]);
-  const rotate = useTransform(scrollYProgress, [0.08, 0.5, 0.92], reduce ? [0, 0, 0] : [-1.3, 0, 1.2]);
-  const scale = useTransform(scrollYProgress, [0.08, 0.5, 0.92], reduce ? [1, 1, 1] : [0.92, 1, 0.9]);
-  const labelX = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["-8%", "18%"]);
+  const background = useTransform(
+    scrollYProgress,
+    [0, 0.16, 0.82, 1],
+    ["#0b0a09", "#e5ddca", "#e5ddca", "#0b0a09"],
+  );
+  const labelOpacity = useTransform(scrollYProgress, [0.08, 0.22, 0.75, 0.92], [0, 1, 1, 0]);
+  const labelY = useTransform(scrollYProgress, [0.08, 0.22, 0.9], reduce ? [0, 0, 0] : [24, 0, -18]);
+  const blockY = useTransform(scrollYProgress, [0, 0.34, 0.78, 1], reduce ? ["0%", "0%", "0%", "0%"] : ["14%", "0%", "0%", "-16%"]);
+  const blockScale = useTransform(scrollYProgress, [0, 0.34, 0.78, 1], reduce ? [1, 1, 1, 1] : [0.94, 1, 1, 0.96]);
+  const ruleScale = useTransform(scrollYProgress, [0.12, 0.72], [0, 1]);
+  const exitVeil = useTransform(scrollYProgress, [0.82, 1], [0, 1]);
 
   return (
-    <motion.section ref={ref} className="relative h-[230svh] w-full" style={{ backgroundColor: background }}>
-      <div className="sticky top-0 flex min-h-svh items-center overflow-hidden px-6 md:px-12">
+    <motion.section
+      ref={ref}
+      className="relative h-[190svh] w-full overflow-clip"
+      style={{ backgroundColor: background }}
+    >
+      <div className="sticky top-0 flex min-h-svh items-center px-6 py-[14vh] md:px-12">
         <motion.div
           aria-hidden="true"
-          className="absolute left-6 top-[14vh] h-px w-[42vw] bg-charcoal/25 md:left-12"
-          style={{ scaleX: scrollYProgress, transformOrigin: "left" }}
+          className="absolute left-6 top-[14vh] h-px w-[42vw] origin-left bg-charcoal/25 md:left-12"
+          style={{ scaleX: ruleScale }}
         />
-        <motion.div style={{ rotate, scale }} className="mx-auto max-w-6xl origin-center">
-          <motion.p style={{ x: labelX }} className="micro-label mb-10 text-charcoal/60">
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-[34vh] origin-bottom bg-charcoal"
+          style={{ opacity: exitVeil, scaleY: exitVeil }}
+        />
+
+        <motion.div
+          style={{ y: blockY, scale: blockScale }}
+          className="relative z-10 mx-auto w-full max-w-6xl origin-center"
+        >
+          <motion.p
+            style={{ opacity: labelOpacity, y: labelY }}
+            className="micro-label mb-10 text-charcoal/60"
+          >
             [ Manifesto ]
           </motion.p>
-          <p className="font-display text-[10vw] leading-[0.95] text-charcoal md:text-[7vw]">
-            {WORDS.map((word, i) => (
-              <Word
-                key={i}
+
+          <div className="space-y-[0.18em] font-display text-[11.5vw] leading-[0.88] text-charcoal md:text-[6.7vw]">
+            {LINES.map((line, index) => (
+              <ManifestoLine
+                key={line.text}
+                text={line.text}
+                emphasis={line.emphasis}
+                index={index}
                 progress={scrollYProgress}
-                range={[0.12 + i / (WORDS.length * 1.32), 0.2 + (i + 1.5) / (WORDS.length * 1.32)]}
-                outline={OUTLINE.has(word)}
-              >
-                {word}
-              </Word>
+              />
             ))}
-          </p>
+          </div>
         </motion.div>
       </div>
     </motion.section>
   );
 }
 
-function Word({
-  children,
+function ManifestoLine({
+  text,
+  emphasis,
+  index,
   progress,
-  range,
-  outline,
 }: {
-  children: string;
-  progress: MotionValue<number>;
-  range: [number, number];
-  outline: boolean;
+  text: string;
+  emphasis: string;
+  index: number;
+  progress: ReturnType<typeof useScroll>["scrollYProgress"];
 }) {
   const reduce = useReducedMotion();
-  const opacity = useTransform(progress, range, [0.08, 1]);
-  const y = useTransform(progress, range, reduce ? [0, 0] : [36, 0]);
-  const blur = useTransform(progress, range, reduce ? ["0px", "0px"] : ["8px", "0px"]);
+  const start = 0.16 + index * 0.16;
+  const end = start + 0.22;
+  const exitStart = 0.72 + index * 0.06;
+
+  const y = useTransform(progress, [start, end, exitStart, 1], reduce ? [0, 0, 0, 0] : [72, 0, 0, -42]);
+  const opacity = useTransform(progress, [start - 0.06, start, end, exitStart, 1], [0, 0, 1, 1, 0]);
+  const clipPath = useTransform(
+    progress,
+    [start, end, exitStart, 1],
+    reduce
+      ? ["inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]
+      : ["inset(0% 0% 100% 0%)", "inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)", "inset(100% 0% 0% 0%)"],
+  );
+
+  const parts = text.split(emphasis);
 
   return (
-    <span className="mr-[0.25em] inline-block overflow-hidden align-bottom">
-      <motion.span
-        className={`inline-block ${outline ? "text-transparent [-webkit-text-stroke:1px_#0b0a09] md:[-webkit-text-stroke:1.5px_#0b0a09]" : "text-charcoal"}`}
-        style={{ opacity, y, filter: blur }}
-      >
-        {children}
-      </motion.span>
-    </span>
+    <div className="overflow-hidden pb-[0.08em]">
+      <motion.p style={{ y, opacity, clipPath }} className={index === 1 ? "md:pl-[10vw]" : ""}>
+        {parts[0]}
+        <span className="text-transparent [-webkit-text-stroke:1px_#0b0a09] md:[-webkit-text-stroke:1.5px_#0b0a09]">
+          {emphasis}
+        </span>
+        {parts[1]}
+      </motion.p>
+    </div>
   );
 }
