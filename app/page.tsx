@@ -3,6 +3,7 @@ import { CustomCursor } from "@/components/custom-cursor";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { Preloader } from "@/components/preloader";
 import { Hero } from "@/components/hero";
+import { PortfolioShowcase } from "@/components/portfolio-showcase";
 import { Manifesto } from "@/components/manifesto";
 import { FeaturedWorks } from "@/components/featured-works";
 import { Marquee } from "@/components/marquee";
@@ -20,6 +21,7 @@ export default function Page() {
       <ScrollProgress />
       <main className="w-full bg-charcoal">
         <Hero />
+        <PortfolioShowcase />
         <Manifesto />
         <FeaturedWorks />
         <Marquee />
