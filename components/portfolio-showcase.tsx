@@ -137,10 +137,10 @@ export function PortfolioShowcase() {
         </motion.div>
 
         <div className="md:col-span-8">
-          {/* Main image — mobile-friendly aspect ratio */}
+          {/* Main image — contained on mobile, full on desktop */}
           <Link
             href={activeItem.gallery}
-            className="focus-ring relative block aspect-[3/4] w-full overflow-hidden bg-charcoal-soft md:aspect-auto md:min-h-[78svh]"
+            className="focus-ring relative block aspect-[4/5] w-full overflow-hidden bg-charcoal-soft sm:aspect-[3/4] md:aspect-auto md:min-h-[78svh]"
           >
             <motion.div
               key={activeItem.src}
@@ -155,7 +155,7 @@ export function PortfolioShowcase() {
                 alt={`${activeItem.label} — Magon Fotografia`}
                 fill
                 sizes="(max-width: 768px) 100vw, 66vw"
-                className="object-cover"
+                className="object-contain md:object-cover"
                 style={{ objectPosition: activeItem.position }}
                 priority={active === 0}
               />
