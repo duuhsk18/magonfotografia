@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { BrandMark } from "@/components/brand-mark";
 import { MediaFrame } from "@/components/media-frame";
 
 export function Hero() {
@@ -64,9 +65,12 @@ export function Hero() {
           style={{ opacity: contentOpacity }}
         >
           {/* Top left */}
-          <motion.div style={{ y: cornerY }}>
-            <p className="micro-label text-cream">MAGON</p>
-            <p className="micro-label mt-1 text-cream/60">Fotografia & Audiovisual</p>
+          <motion.div style={{ y: cornerY }} className="flex items-start justify-between gap-6">
+            <div>
+              <p className="micro-label text-cream">MAGON</p>
+              <p className="micro-label mt-1 text-cream/60">Fotografia & Audiovisual</p>
+            </div>
+            <BrandMark priority className="hidden h-12 w-auto opacity-75 md:block" />
           </motion.div>
 
           {/* Main title */}

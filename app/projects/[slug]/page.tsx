@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { projects } from "@/lib/projects";
+import { BrandMark } from "@/components/brand-mark";
 import { MediaFrame } from "@/components/media-frame";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { CustomCursor } from "@/components/custom-cursor";
@@ -47,9 +48,10 @@ export default function ProjectPage() {
           </Link>
           <Link
             href="/"
-            className="font-display text-xl text-cream mix-blend-difference"
+            className="focus-ring mix-blend-difference"
+            aria-label="Magon Fotografia & Audiovisual"
           >
-            MAGON
+            <BrandMark className="h-10 w-auto opacity-90" />
           </Link>
           <span className="micro-label text-cream mix-blend-difference">
             {project.index}

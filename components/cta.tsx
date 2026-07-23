@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { BrandMark } from "@/components/brand-mark";
 
 const WHATSAPP = "https://wa.me/5516999999999?text=Ol%C3%A1%2C%20quero%20iniciar%20um%20projeto%20com%20a%20Magon";
 const EMAIL = "mailto:contato@magon.com.br";
@@ -30,6 +31,7 @@ export function CTA() {
         style={{ scaleX: bgScale, opacity: bgOpacity }}
       />
       <motion.div style={{ y, scale }} className="relative z-10 origin-left">
+        <BrandMark className="mb-10 h-20 w-auto opacity-80 md:h-24" />
         <h2 className="font-display text-[18vw] leading-[0.82] text-warm-white md:text-[13vw]">
           Tem algo
           <br />

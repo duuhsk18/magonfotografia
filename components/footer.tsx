@@ -1,3 +1,5 @@
+import { BrandMark } from "@/components/brand-mark";
+
 export function Footer() {
   const year = new Date().getFullYear();
 
@@ -6,12 +8,8 @@ export function Footer() {
       <div className="flex flex-col gap-12">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="font-display text-6xl leading-none text-cream md:text-8xl">
-              MAGON
-            </p>
-            <p className="micro-label mt-3 text-muted-foreground">
-              Fotografia & Audiovisual
-            </p>
+            <BrandMark className="h-24 w-auto md:h-28" />
+            <p className="sr-only">MAGON</p>
           </div>
 
           <nav className="grid grid-cols-2 gap-x-12 gap-y-3">
