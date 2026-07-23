@@ -4,9 +4,13 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { projects } from "@/lib/projects";
 import { BrandMark } from "@/components/brand-mark";
-import { MediaFrame } from "@/components/media-frame";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { Footer } from "@/components/footer";
+import { ProjectSlideshow } from "@/components/project-slideshow";
+
+const WHATSAPP = "https://wa.me/5516999942889?text=Ol%C3%A1%2C%20quero%20iniciar%20um%20projeto%20com%20a%20Magon";
+const EMAIL = "mailto:contato@magonfotografia.com";
+const INSTAGRAM = "https://instagram.com/magonfotografia";
 
 export default function ProjectPage() {
   const params = useParams();
@@ -56,15 +60,12 @@ export default function ProjectPage() {
           </span>
         </div>
 
-        {/* Full-bleed hero media */}
+        {/* Full-bleed hero slideshow */}
         <section className="relative h-svh w-full overflow-hidden">
-          <MediaFrame
-            poster={project.media}
+          <ProjectSlideshow
+            slides={project.mediaSlides}
             alt={`${project.title} — ${project.category}`}
-            priority
-            sizes="100vw"
-            objectFit={project.category.includes("RETRATOS") ? "contain" : "cover"}
-            objectPosition={project.category.includes("RETRATOS") ? "center 20%" : "center center"}
+            interval={4800}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-charcoal/40" />
           <div className="absolute bottom-0 left-0 w-full p-6 md:p-12">
@@ -89,6 +90,40 @@ export default function ProjectPage() {
             <p className="font-serif text-3xl leading-snug text-cream md:text-5xl">
               {project.fullDescription}
             </p>
+          </div>
+        </section>
+
+        {/* CTA — iniciar projeto */}
+        <section className="border-t border-border px-6 py-[12vh] md:px-12">
+          <p className="micro-label mb-8 text-muted-foreground">[ Quer algo assim? ]</p>
+          <h2 className="font-display text-[14vw] leading-[0.84] text-cream md:text-[7vw]">
+            Vamos criar
+            <br />
+            <span className="text-outline">juntos.</span>
+          </h2>
+          <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
+            <a
+              href={WHATSAPP}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-ring inline-flex items-center gap-3 bg-cream px-8 py-5 text-base font-medium text-charcoal transition hover:bg-warm-white"
+            >
+              WhatsApp <span>→</span>
+            </a>
+            <a
+              href={EMAIL}
+              className="focus-ring inline-flex items-center gap-3 border border-border px-8 py-5 text-base font-medium text-cream transition hover:border-cream"
+            >
+              contato@magonfotografia.com <span>→</span>
+            </a>
+            <a
+              href={INSTAGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-ring inline-flex items-center gap-3 border border-border px-8 py-5 text-base font-medium text-cream transition hover:border-cream"
+            >
+              @magonfotografia <span>↗</span>
+            </a>
           </div>
         </section>
 

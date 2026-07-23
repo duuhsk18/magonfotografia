@@ -4,8 +4,9 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { BrandMark } from "@/components/brand-mark";
 
-const WHATSAPP = "https://wa.me/5516999999999?text=Ol%C3%A1%2C%20quero%20iniciar%20um%20projeto%20com%20a%20Magon";
-const EMAIL = "mailto:contato@magon.com.br";
+const WHATSAPP = "https://wa.me/5516999942889?text=Ol%C3%A1%2C%20quero%20iniciar%20um%20projeto%20com%20a%20Magon";
+const EMAIL = "mailto:contato@magonfotografia.com";
+const INSTAGRAM = "https://instagram.com/magonfotografia";
 
 export function CTA() {
   const ref = useRef<HTMLElement>(null);
@@ -42,10 +43,10 @@ export function CTA() {
           Vamos fazer isso ser visto.
         </p>
 
-        <div className="mt-14 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
-          <MagneticLink href={WHATSAPP} text="Iniciar um projeto" primary />
-          <MagneticLink href={WHATSAPP} text="Falar pelo WhatsApp" />
-          <MagneticLink href={EMAIL} text="Enviar e-mail" />
+        <div className="mt-14 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
+          <MagneticLink href={WHATSAPP} text="WhatsApp · (16) 99994-2889" primary />
+          <MagneticLink href={EMAIL} text="contato@magonfotografia.com" />
+          <MagneticLink href={INSTAGRAM} text="@magonfotografia" />
         </div>
       </motion.div>
     </section>

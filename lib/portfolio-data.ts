@@ -26,7 +26,7 @@ export const portfolioGalleries = [
     "category": "Cidade em Foco",
     "sourcePath": "CIDADE EM FOCO",
     "count": 9,
-    "cover": "/portfolio/full/cidade-em-foco/005-eduardo-0270.webp",
+    "cover": "/portfolio/full/cidade-em-foco/009-eduardo-171.webp",
     "photos": [
       {
         "id": "cidade-em-foco-001-eduardo-06",
@@ -2646,7 +2646,7 @@ export const portfolioGalleries = [
     "category": "Retratos",
     "sourcePath": "RETRATOS  /  LIVIA LIMA - ESTAÇÃO",
     "count": 19,
-    "cover": "/portfolio/full/retratos-livia-lima-estacao/001-mg-8880.webp",
+    "cover": "/portfolio/full/retratos-livia-lima-estacao/014-mg-8897.webp",
     "photos": [
       {
         "id": "retratos-livia-lima-estacao-001-mg-8880",
@@ -2846,7 +2846,7 @@ export const portfolioGalleries = [
     "category": "Retratos",
     "sourcePath": "RETRATOS  /  STEPHANIE LIMA - UFSCAR",
     "count": 67,
-    "cover": "/portfolio/full/retratos-stephanie-lima-ufscar/030-img-8280.webp",
+    "cover": "/portfolio/full/retratos-stephanie-lima-ufscar/023-img-8262.webp",
     "photos": [
       {
         "id": "retratos-stephanie-lima-ufscar-001-img-8164",
