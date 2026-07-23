@@ -1364,112 +1364,72 @@ export const portfolioGalleries = [
     "slug": "cobertura-eventos-bares-e-clubs",
     "title": "Bares e Clubs",
     "category": "Cobertura Eventos",
-    "sourcePath": "COBERTURA EVENTOS  /  BARES E CLUBS",
-    "count": 10,
-    "cover": "/portfolio/full/cobertura-eventos-bares-e-clubs/001-modelo-carrossel-10-fotos-01.webp",
+    "sourcePath": "COBERTURA EVENTOS / BARES E CLUBS",
+    "count": 6,
+    "cover": "/portfolio/full/cobertura-eventos-bares-e-clubs/001-mg-1449.webp",
     "photos": [
-      {
-        "id": "cobertura-eventos-bares-e-clubs-001-modelo-carrossel-10-fotos-01",
-        "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/001-modelo-carrossel-10-fotos-01.webp",
-        "alt": "Bares e Clubs — Magon Fotografia",
-        "width": 1080,
-        "height": 1350,
-        "originalWidth": 1080,
-        "originalHeight": 1350,
-        "originalName": "MODELO-CARROSSEL---10-FOTOS_01.png"
-      },
-      {
-        "id": "cobertura-eventos-bares-e-clubs-002-modelo-carrossel-10-fotos-02",
-        "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/002-modelo-carrossel-10-fotos-02.webp",
-        "alt": "Bares e Clubs — Magon Fotografia",
-        "width": 1080,
-        "height": 1350,
-        "originalWidth": 1080,
-        "originalHeight": 1350,
-        "originalName": "MODELO-CARROSSEL---10-FOTOS_02.png"
-      },
-      {
-        "id": "cobertura-eventos-bares-e-clubs-003-modelo-carrossel-10-fotos-03",
-        "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/003-modelo-carrossel-10-fotos-03.webp",
-        "alt": "Bares e Clubs — Magon Fotografia",
-        "width": 1080,
-        "height": 1350,
-        "originalWidth": 1080,
-        "originalHeight": 1350,
-        "originalName": "MODELO-CARROSSEL---10-FOTOS_03.png"
-      },
-      {
-        "id": "cobertura-eventos-bares-e-clubs-004-modelo-carrossel-10-fotos-04",
-        "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/004-modelo-carrossel-10-fotos-04.webp",
-        "alt": "Bares e Clubs — Magon Fotografia",
-        "width": 1080,
-        "height": 1350,
-        "originalWidth": 1080,
-        "originalHeight": 1350,
-        "originalName": "MODELO-CARROSSEL---10-FOTOS_04.png"
-      },
-      {
-        "id": "cobertura-eventos-bares-e-clubs-005-modelo-carrossel-10-fotos-05",
-        "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/005-modelo-carrossel-10-fotos-05.webp",
-        "alt": "Bares e Clubs — Magon Fotografia",
-        "width": 1080,
-        "height": 1350,
-        "originalWidth": 1080,
-        "originalHeight": 1350,
-        "originalName": "MODELO-CARROSSEL---10-FOTOS_05.png"
-      },
-      {
-        "id": "cobertura-eventos-bares-e-clubs-006-modelo-carrossel-10-fotos-06",
-        "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/006-modelo-carrossel-10-fotos-06.webp",
-        "alt": "Bares e Clubs — Magon Fotografia",
-        "width": 1080,
-        "height": 1350,
-        "originalWidth": 1080,
-        "originalHeight": 1350,
-        "originalName": "MODELO-CARROSSEL---10-FOTOS_06.png"
-      },
-      {
-        "id": "cobertura-eventos-bares-e-clubs-007-modelo-carrossel-10-fotos-07",
-        "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/007-modelo-carrossel-10-fotos-07.webp",
-        "alt": "Bares e Clubs — Magon Fotografia",
-        "width": 1080,
-        "height": 1350,
-        "originalWidth": 1080,
-        "originalHeight": 1350,
-        "originalName": "MODELO-CARROSSEL---10-FOTOS_07.png"
-      },
-      {
-        "id": "cobertura-eventos-bares-e-clubs-008-modelo-carrossel-10-fotos-08",
-        "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/008-modelo-carrossel-10-fotos-08.webp",
-        "alt": "Bares e Clubs — Magon Fotografia",
-        "width": 1080,
-        "height": 1350,
-        "originalWidth": 1080,
-        "originalHeight": 1350,
-        "originalName": "MODELO-CARROSSEL---10-FOTOS_08.png"
-      },
-      {
-        "id": "cobertura-eventos-bares-e-clubs-009-modelo-carrossel-10-fotos-09",
-        "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/009-modelo-carrossel-10-fotos-09.webp",
-        "alt": "Bares e Clubs — Magon Fotografia",
-        "width": 1080,
-        "height": 1350,
-        "originalWidth": 1080,
-        "originalHeight": 1350,
-        "originalName": "MODELO-CARROSSEL---10-FOTOS_09.png"
-      },
-      {
-        "id": "cobertura-eventos-bares-e-clubs-010-modelo-carrossel-10-fotos-10",
-        "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/010-modelo-carrossel-10-fotos-10.webp",
-        "alt": "Bares e Clubs — Magon Fotografia",
-        "width": 1080,
-        "height": 1350,
-        "originalWidth": 1080,
-        "originalHeight": 1350,
-        "originalName": "MODELO-CARROSSEL---10-FOTOS_10.png"
-      }
+        {
+            "id": "cobertura-eventos-bares-e-clubs-001-mg-1449",
+            "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/001-mg-1449.webp",
+            "alt": "Bares e Clubs — Magon Fotografia",
+            "width": 1200,
+            "height": 1800,
+            "originalWidth": 1200,
+            "originalHeight": 1800,
+            "originalName": "_MG_1449.jpg"
+        },
+        {
+            "id": "cobertura-eventos-bares-e-clubs-002-mg-1631",
+            "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/002-mg-1631.webp",
+            "alt": "Bares e Clubs — Magon Fotografia",
+            "width": 1440,
+            "height": 1800,
+            "originalWidth": 1440,
+            "originalHeight": 1800,
+            "originalName": "_MG_1631.jpg"
+        },
+        {
+            "id": "cobertura-eventos-bares-e-clubs-003-mg-1632-3",
+            "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/003-mg-1632-3.webp",
+            "alt": "Bares e Clubs — Magon Fotografia",
+            "width": 1800,
+            "height": 1440,
+            "originalWidth": 1800,
+            "originalHeight": 1440,
+            "originalName": "_MG_1632-3.jpg"
+        },
+        {
+            "id": "cobertura-eventos-bares-e-clubs-004-mg-1664-aprimorado-nr-2",
+            "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/004-mg-1664-aprimorado-nr-2.webp",
+            "alt": "Bares e Clubs — Magon Fotografia",
+            "width": 1200,
+            "height": 1800,
+            "originalWidth": 1200,
+            "originalHeight": 1800,
+            "originalName": "_MG_1664-Aprimorado-NR-2.jpg"
+        },
+        {
+            "id": "cobertura-eventos-bares-e-clubs-005-mg-1723-3",
+            "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/005-mg-1723-3.webp",
+            "alt": "Bares e Clubs — Magon Fotografia",
+            "width": 1200,
+            "height": 1800,
+            "originalWidth": 1200,
+            "originalHeight": 1800,
+            "originalName": "_MG_1723-3.jpg"
+        },
+        {
+            "id": "cobertura-eventos-bares-e-clubs-006-mg-1952",
+            "src": "/portfolio/full/cobertura-eventos-bares-e-clubs/006-mg-1952.webp",
+            "alt": "Bares e Clubs — Magon Fotografia",
+            "width": 1200,
+            "height": 1800,
+            "originalWidth": 1200,
+            "originalHeight": 1800,
+            "originalName": "_MG_1952.jpg"
+        }
     ]
-  },
+},
   {
     "slug": "cobertura-eventos-rave",
     "title": "Rave",
