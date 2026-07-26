@@ -99,7 +99,17 @@ export function PortfolioShowcase() {
   const [isAutoPaused, setIsAutoPaused] = useState(false);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 
-  const headerY = useTransform(scrollYProgress, [0, 0.28, 1], reduce ? ["0%", "0%", "0%"] : ["10%", "0%", "-6%"]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const headerY = useTransform(scrollYProgress, [0, 0.28, 1], reduce || isMobile ? ["0%", "0%", "0%"] : ["10%", "0%", "-6%"]);
   const activeItem = portfolioItems[active];
 
   useEffect(() => {
@@ -118,7 +128,7 @@ export function PortfolioShowcase() {
   return (
     <section ref={ref} className="relative w-full overflow-hidden bg-charcoal px-6 py-[10vh] md:py-[14vh] md:px-12">
       <div className="grid gap-8 md:grid-cols-12 md:items-start md:gap-10">
-        <motion.div style={{ y: headerY }} className="w-full max-w-full md:sticky md:top-[12vh] md:col-span-4">
+        <motion.div style={isMobile ? undefined : { y: headerY }} className="w-full max-w-full md:sticky md:top-[12vh] md:col-span-4">
           <p className="micro-label mb-6 text-muted-foreground md:mb-8">[ Demonstração ]</p>
           <h2 className="max-w-[calc(100vw-3rem)] font-display text-[13vw] leading-[0.82] text-cream md:max-w-none md:text-[6.6vw]">
             Galeria{" "}
@@ -136,11 +146,11 @@ export function PortfolioShowcase() {
           </Link>
         </motion.div>
 
-        <div className="md:col-span-8">
+        <div className="w-full max-w-full overflow-hidden md:col-span-8">
           {/* Main image — contained on mobile, full on desktop */}
           <Link
             href={activeItem.gallery}
-            className="focus-ring relative block aspect-[4/5] w-full overflow-hidden bg-charcoal-soft sm:aspect-[3/4] md:aspect-auto md:min-h-[78svh]"
+            className="focus-ring relative block aspect-[3/4] w-full overflow-hidden bg-charcoal-soft md:aspect-auto md:min-h-[78svh]"
           >
             <motion.div
               key={activeItem.src}
@@ -155,7 +165,7 @@ export function PortfolioShowcase() {
                 alt={`${activeItem.label} — Magon Fotografia`}
                 fill
                 sizes="(max-width: 768px) 100vw, 66vw"
-                className="object-contain md:object-cover"
+                className="object-cover"
                 style={{ objectPosition: activeItem.position }}
                 priority={active === 0}
               />
