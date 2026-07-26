@@ -10,6 +10,22 @@ interface EventHeroProps {
 export function EventHero({ event }: EventHeroProps) {
   return (
     <section className="relative overflow-hidden bg-charcoal">
+      {/* Photo background — positioned right/center, gradient fades left for text */}
+      <div className="absolute inset-0 -z-10">
+        <img
+          src="https://pub-19508add45684695bff4e914175513fd.r2.dev/events/circuito-cidades-paulistas-sao-carlos-2026/previews/019_preview.jpg"
+          alt=""
+          className="h-full w-full object-cover object-[70%_center]"
+          draggable={false}
+        />
+        {/* Left-to-right gradient: opaque left (text) → transparent right (photo shows) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal from-30% via-charcoal/80 via-50% to-transparent" />
+        {/* Mobile: slightly darker overall for readability */}
+        <div className="absolute inset-0 bg-charcoal/40 lg:bg-transparent" />
+        {/* Top/bottom fade */}
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/50 via-transparent to-charcoal/70" />
+      </div>
+
       {/* Header */}
       <header className="relative z-10 flex items-center justify-between gap-6 px-6 py-6 md:px-12 md:py-8">
         <Link href="/" className="focus-ring inline-flex" aria-label="Voltar para Magon Fotografia">
@@ -81,20 +97,8 @@ export function EventHero({ event }: EventHeroProps) {
             </div>
           </div>
 
-          {/* Right: Background photo + pricing card + featured photos */}
+          {/* Right: pricing card + featured photos */}
           <div className="relative space-y-6">
-            {/* Vertical photo as background slide */}
-            <div className="absolute -inset-6 -z-10 hidden overflow-hidden rounded-3xl lg:block">
-              <img
-                src="https://pub-19508add45684695bff4e914175513fd.r2.dev/events/circuito-cidades-paulistas-sao-carlos-2026/previews/019_preview.jpg"
-                alt=""
-                className="h-full w-full object-cover object-center"
-                draggable={false}
-              />
-              {/* Gradient overlay: left side more transparent, right side more opaque */}
-              <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/40" />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-transparent to-charcoal/60" />
-            </div>
             {/* Pricing card */}
             <div className="rounded-2xl border border-amber-500/20 bg-charcoal-soft/80 p-6 backdrop-blur-sm md:p-8">
               <p className="mb-3 text-sm font-medium text-amber-400">Compre mais, pague menos</p>
