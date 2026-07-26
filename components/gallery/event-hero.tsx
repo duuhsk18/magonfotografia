@@ -16,7 +16,7 @@ export function EventHero({ event }: EventHeroProps) {
         <img
           src="/media/hero-event.jpg"
           alt=""
-          className="h-full w-full object-cover object-[70%_center]"
+          className="h-full w-full object-cover object-[center_30%]"
           draggable={false}
         />
         {/* Left-to-right gradient: opaque left (text) → transparent right (photo shows) */}
