@@ -6,6 +6,7 @@ import { PhotoGrid } from './photo-grid'
 import { PhotoPreview } from './photo-preview'
 import { CartBar } from './cart-bar'
 import { CartModal } from './cart-modal'
+import { PromoPopup } from './promo-popup'
 
 interface GalleryPageClientProps {
   event: Event
@@ -35,6 +36,10 @@ export function GalleryPageClient({ event }: GalleryPageClientProps) {
   const [searchBib, setSearchBib] = useState('')
   const [searchResults, setSearchResults] = useState<{ matched: Photo[]; suggested: Photo[] } | null>(null)
   const [searching, setSearching] = useState(false)
+  const [showPromo, setShowPromo] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return !localStorage.getItem(`magon-promo-dismissed-${event.slug}`)
+  })
 
   // Save selection to localStorage
   useEffect(() => {
@@ -202,6 +207,17 @@ export function GalleryPageClient({ event }: GalleryPageClientProps) {
           event={event}
           onClose={() => setShowCart(false)}
           onRemovePhoto={(id) => setSelectedIds((prev) => prev.filter((p) => p !== id))}
+        />
+      )}
+
+      {/* Promo popup */}
+      {showPromo && (
+        <PromoPopup
+          promoEndDate="02/08/2026"
+          onClose={() => {
+            setShowPromo(false)
+            localStorage.setItem(`magon-promo-dismissed-${event.slug}`, 'true')
+          }}
         />
       )}
     </>

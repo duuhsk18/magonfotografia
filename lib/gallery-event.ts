@@ -21,12 +21,55 @@ export const circuitoCidadesPaulistasEvent: Event = {
 export const defaultEventPricing: EventPricing = {
   id: 'pricing-circuito-cidades-paulistas-sao-carlos-2026',
   eventId: circuitoCidadesPaulistasEvent.id,
-  individualPrice: 19.9,
-  package3Price: 49.9,
-  package5Price: 79.9,
-  package10Price: 149.9,
-  packageAllPrice: undefined,
-  promoActive: false,
+  individualPrice: 10.0,
+  package3Price: 24.0,   // 3 fotos × R$8,00 (20% OFF)
+  package5Price: 35.0,   // 5 fotos × R$7,00 (30% OFF)
+  package10Price: 70.0,  // 10 fotos × R$7,00 (30% OFF)
+  packageAllPrice: undefined, // sem pacote "todas"
+  promoActive: true,
+  promoDiscountPercent: undefined,
+  promoStartAt: '2026-07-26T00:00:00-03:00',
+  promoEndAt: '2026-08-02T23:59:59-03:00',
+  promoDescription: 'Preços promocionais durante a primeira semana. Válido até 02/08/2026.',
+}
+
+/**
+ * Pricing tiers for display:
+ * 1 foto: R$10,00
+ * 2+ fotos: 10% OFF → R$9,00/foto
+ * 3+ fotos: 20% OFF → R$8,00/foto
+ * 5+ fotos: 30% OFF → R$7,00/foto
+ *
+ * Após 7 dias (02/08): base sobe para R$12,00 mantendo mesmos %.
+ */
+export function calculateProgressiveDiscount(quantity: number, basePrice = 10.0) {
+  let discountPercent = 0
+  let label = ''
+
+  if (quantity >= 5) {
+    discountPercent = 30
+    label = '30% OFF'
+  } else if (quantity >= 3) {
+    discountPercent = 20
+    label = '20% OFF'
+  } else if (quantity >= 2) {
+    discountPercent = 10
+    label = '10% OFF'
+  }
+
+  const pricePerPhoto = basePrice * (1 - discountPercent / 100)
+  const totalPrice = pricePerPhoto * quantity
+  const savings = (basePrice * quantity) - totalPrice
+
+  return {
+    quantity,
+    basePrice,
+    discountPercent,
+    label,
+    pricePerPhoto,
+    totalPrice,
+    savings,
+  }
 }
 
 export type GalleryPublicationStatus =
