@@ -57,8 +57,8 @@ export function EventSearch({ event, statusLabel, statusDescription }: EventSear
                 type="button"
                 disabled={!hasSearch}
                 onClick={() => {
-                  const target = document.getElementById('galeria-em-processamento')
-                  target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  // Navigate to gallery with search param
+                  window.location.href = `/eventos/${event.slug}/galeria?bib=${normalizedBib}`
                 }}
                 className="focus-ring border border-cream bg-cream px-5 py-3 text-sm font-medium text-charcoal transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
               >
@@ -67,7 +67,7 @@ export function EventSearch({ event, statusLabel, statusDescription }: EventSear
             </div>
             {hasSearch && (
               <p className="mt-3 text-sm text-muted-foreground">
-                Busca preparada para o número <strong className="text-cream">{normalizedBib}</strong>. Os resultados aparecerão quando o lote for publicado.
+                Ao clicar em Buscar, você será redirecionado à galeria com resultados para o número <strong className="text-cream">{normalizedBib}</strong>.
               </p>
             )}
           </SearchCard>
