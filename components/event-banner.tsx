@@ -3,8 +3,21 @@ import Image from 'next/image'
 
 export function EventBanner() {
   return (
-    <section className="relative overflow-hidden border-b border-amber-500/30 bg-gradient-to-b from-charcoal-soft via-charcoal to-charcoal-soft">
-      {/* Background accents */}
+    <section className="relative overflow-hidden border-b border-amber-500/30">
+      {/* Video background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
+        poster="/media/hero-poster.png"
+      >
+        <source src="/media/running-bg.mp4" type="video/mp4" />
+      </video>
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal/85 via-charcoal/80 to-charcoal/90" />
+      {/* Accent glows */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute -right-40 top-0 h-80 w-80 rounded-full bg-amber-500/15 blur-[120px]" />
         <div className="absolute -left-20 bottom-0 h-60 w-60 rounded-full bg-amber-500/10 blur-[100px]" />

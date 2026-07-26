@@ -21,8 +21,8 @@ export default function Page() {
       <SmoothScroll />
       <ScrollProgress />
       <main className="w-full bg-charcoal">
-        <EventBanner />
         <Hero />
+        <EventBanner />
         <PortfolioShowcase />
         <Manifesto />
         <FeaturedWorks />
