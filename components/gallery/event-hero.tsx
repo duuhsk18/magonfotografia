@@ -12,7 +12,6 @@ export function EventHero({ event }: EventHeroProps) {
     <section className="relative overflow-hidden bg-charcoal">
       {/* Photo background — positioned right/center, gradient fades left for text */}
       <div className="absolute inset-0 z-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/media/hero-event.jpg"
           alt=""
