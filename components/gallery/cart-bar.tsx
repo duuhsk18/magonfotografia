@@ -73,19 +73,25 @@ function Recommendation({ count, pricing }: { count: number; pricing: typeof def
 function calculateBestDeal(quantity: number, pricing: typeof defaultEventPricing) {
   const individualTotal = quantity * pricing.individualPrice
 
-  const options = [
-    { type: 'individual', price: individualTotal, minQty: 1 },
-    { type: 'package_3', price: pricing.package3Price, minQty: 3 },
-    { type: 'package_5', price: pricing.package5Price, minQty: 5 },
-    { type: 'package_10', price: pricing.package10Price, minQty: 10 },
+  // Packages that COVER the quantity (package must fit all selected photos)
+  const options: { type: string; price: number; covers: number }[] = [
+    { type: 'individual', price: individualTotal, covers: quantity },
   ]
 
-  if (pricing.packageAllPrice) {
-    options.push({ type: 'all', price: pricing.packageAllPrice, minQty: quantity })
+  if (quantity <= 3) options.push({ type: 'package_3', price: pricing.package3Price, covers: 3 })
+  if (quantity <= 5) options.push({ type: 'package_5', price: pricing.package5Price, covers: 5 })
+  if (quantity <= 10) options.push({ type: 'package_10', price: pricing.package10Price, covers: 10 })
+  if (pricing.packageAllPrice) options.push({ type: 'all', price: pricing.packageAllPrice, covers: quantity })
+
+  // Also consider if buying a bigger package is cheaper than individual
+  if (quantity > 3 && quantity <= 5 && pricing.package5Price < individualTotal) {
+    options.push({ type: 'package_5', price: pricing.package5Price, covers: 5 })
+  }
+  if (quantity > 5 && quantity <= 10 && pricing.package10Price < individualTotal) {
+    options.push({ type: 'package_10', price: pricing.package10Price, covers: 10 })
   }
 
-  const validOptions = options.filter((opt) => quantity >= opt.minQty || opt.type === 'individual')
-  const bestOption = validOptions.reduce((best, opt) => (opt.price < best.price ? opt : best))
+  const bestOption = options.reduce((best, opt) => (opt.price < best.price ? opt : best))
 
   return {
     productType: bestOption.type,
