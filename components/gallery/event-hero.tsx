@@ -11,9 +11,10 @@ export function EventHero({ event }: EventHeroProps) {
   return (
     <section className="relative overflow-hidden bg-charcoal">
       {/* Photo background — positioned right/center, gradient fades left for text */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 z-0">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://pub-19508add45684695bff4e914175513fd.r2.dev/events/circuito-cidades-paulistas-sao-carlos-2026/previews/019_preview.jpg"
+          src="/media/hero-event.jpg"
           alt=""
           className="h-full w-full object-cover object-[70%_center]"
           draggable={false}
