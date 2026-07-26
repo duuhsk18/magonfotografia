@@ -81,8 +81,20 @@ export function EventHero({ event }: EventHeroProps) {
             </div>
           </div>
 
-          {/* Right: Event card + featured photos placeholder */}
-          <div className="space-y-6">
+          {/* Right: Background photo + pricing card + featured photos */}
+          <div className="relative space-y-6">
+            {/* Vertical photo as background slide */}
+            <div className="absolute -inset-6 -z-10 hidden overflow-hidden rounded-3xl lg:block">
+              <img
+                src="https://pub-19508add45684695bff4e914175513fd.r2.dev/events/circuito-cidades-paulistas-sao-carlos-2026/previews/019_preview.jpg"
+                alt=""
+                className="h-full w-full object-cover object-center"
+                draggable={false}
+              />
+              {/* Gradient overlay: left side more transparent, right side more opaque */}
+              <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-transparent to-charcoal/60" />
+            </div>
             {/* Pricing card */}
             <div className="rounded-2xl border border-amber-500/20 bg-charcoal-soft/80 p-6 backdrop-blur-sm md:p-8">
               <p className="mb-3 text-sm font-medium text-amber-400">Compre mais, pague menos</p>
