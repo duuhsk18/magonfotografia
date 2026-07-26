@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
         original_width: photo.original_width || photo.originalWidth,
         original_height: photo.original_height || photo.originalHeight,
         file_hash: photo.file_hash || photo.fileHash,
-        exif_datetime: photo.exif_datetime || photo.exifDatetime || null,
+        exif_datetime: parseExifDatetime(photo.exif_datetime || photo.exifDatetime) || null,
         bib_number: photo.bib_number || photo.bibNumber || null,
         bib_confidence: photo.bib_confidence || photo.bibConfidence || 0,
         bib_status: photo.bib_number || photo.bibNumber ? 'pending' : 'not_found',
@@ -108,4 +108,19 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
+}
+
+/**
+ * Parse EXIF datetime format "YYYY:MM:DD HH:MM:SS" to ISO.
+ */
+function parseExifDatetime(value: unknown): string | null {
+  if (!value || typeof value !== 'string') return null
+  // EXIF format: "2024:06:24 21:58:44"
+  const match = value.match(/^(\d{4}):(\d{2}):(\d{2})\s+(\d{2}:\d{2}:\d{2})$/)
+  if (match) {
+    return `${match[1]}-${match[2]}-${match[3]}T${match[4]}`
+  }
+  // Already ISO-ish
+  if (value.includes('-') && value.length >= 10) return value
+  return null
 }
