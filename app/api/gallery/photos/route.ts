@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase, isSupabaseConfigured } from '@/lib/supabase'
+import { mapPhotoFromDb, resolveEventIdBySlug, type DbPhoto } from '@/lib/server/gallery-db'
 
 /**
  * GET /api/gallery/photos
@@ -30,12 +31,21 @@ export async function GET(request: NextRequest) {
       )
     }
 
+    const eventId = await resolveEventIdBySlug(supabase, eventSlug)
+
+    if (!eventId) {
+      return NextResponse.json(
+        { error: 'Event not found' },
+        { status: 404 }
+      )
+    }
+
     // Query published photos for the event
     // Ordered by creation date
     const { data: photos, error, count } = await supabase
       .from('photos')
       .select('*', { count: 'exact' })
-      .eq('event_id', eventSlug)
+      .eq('event_id', eventId)
       .eq('status', 'published')
       .order('created_at', { ascending: true })
       .range(offset, offset + limit - 1)
@@ -51,7 +61,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        data: photos || [],
+        data: (photos || []).map((photo) => mapPhotoFromDb(photo as DbPhoto)),
         total: count || 0,
         limit,
         offset,

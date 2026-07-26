@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { isSupabaseConfigured } from '@/lib/supabase'
+import { resolveEventIdBySlug } from '@/lib/server/gallery-db'
 
 /**
  * POST /api/gallery/upload
@@ -31,11 +32,12 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { eventId, photos, batchId } = body
+    const { eventId, eventSlug, photos, batchId } = body
+    const eventIdentifier = eventSlug || eventId
 
-    if (!eventId || !photos || !Array.isArray(photos)) {
+    if (!eventIdentifier || !photos || !Array.isArray(photos)) {
       return NextResponse.json(
-        { error: 'Missing eventId or photos array' },
+        { error: 'Missing eventSlug/eventId or photos array' },
         { status: 400 }
       )
     }
@@ -43,6 +45,14 @@ export async function POST(request: NextRequest) {
     // Import admin client dynamically to avoid build-time errors
     const { getAdminClient } = await import('@/lib/server/supabase-admin')
     const supabaseAdmin = getAdminClient()
+    const resolvedEventId = await resolveEventIdBySlug(supabaseAdmin, eventIdentifier)
+
+    if (!resolvedEventId) {
+      return NextResponse.json(
+        { error: 'Event not found' },
+        { status: 404 }
+      )
+    }
 
     // Insert photos in batches of 50
     const results = []
@@ -50,7 +60,7 @@ export async function POST(request: NextRequest) {
 
     for (let i = 0; i < photos.length; i += BATCH_SIZE) {
       const batch = photos.slice(i, i + BATCH_SIZE).map((photo: Record<string, unknown>) => ({
-        event_id: eventId,
+        event_id: resolvedEventId,
         filename: photo.filename,
         original_width: photo.original_width || photo.originalWidth,
         original_height: photo.original_height || photo.originalHeight,
@@ -72,7 +82,7 @@ export async function POST(request: NextRequest) {
 
       const { data, error } = await supabaseAdmin
         .from('photos')
-        .upsert(batch, { onConflict: 'file_hash' })
+        .insert(batch)
         .select('id')
 
       if (error) {

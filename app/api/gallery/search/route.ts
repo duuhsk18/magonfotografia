@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase, isSupabaseConfigured } from '@/lib/supabase'
+import { mapPhotoFromDb, resolveEventIdBySlug, type DbPhoto } from '@/lib/server/gallery-db'
 
 /**
  * GET /api/gallery/search
@@ -38,12 +39,21 @@ export async function GET(request: NextRequest) {
       )
     }
 
+    const eventId = await resolveEventIdBySlug(supabase, eventSlug)
+
+    if (!eventId) {
+      return NextResponse.json(
+        { error: 'Event not found' },
+        { status: 404 }
+      )
+    }
+
     // Search for exact or partial matches
     // First try exact match (OCR recognized and confirmed)
     const { data: exactMatches, error: exactError } = await supabase
       .from('photos')
       .select('*')
-      .eq('event_id', eventSlug)
+      .eq('event_id', eventId)
       .eq('status', 'published')
       .eq('bib_number', normalizedBib)
       .eq('bib_status', 'confirmed')
@@ -61,7 +71,7 @@ export async function GET(request: NextRequest) {
     const { data: probableMatches, error: probableError } = await supabase
       .from('photos')
       .select('*')
-      .eq('event_id', eventSlug)
+      .eq('event_id', eventId)
       .eq('status', 'published')
       .ilike('bib_number', `%${normalizedBib}%`)
       .neq('bib_status', 'confirmed')
@@ -76,8 +86,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        matched: exactMatches || [],
-        suggested: probableMatches || [],
+        matched: (exactMatches || []).map((photo) => mapPhotoFromDb(photo as DbPhoto)),
+        suggested: (probableMatches || []).map((photo) => mapPhotoFromDb(photo as DbPhoto)),
         totalMatched: (exactMatches?.length || 0) + (probableMatches?.length || 0),
       },
       { status: 200 }

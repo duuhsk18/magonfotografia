@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase, isSupabaseConfigured } from '@/lib/supabase'
+import { isSupabaseConfigured } from '@/lib/supabase'
 import { defaultEventPricing } from '@/lib/gallery-event'
+import { resolveEventIdBySlug } from '@/lib/server/gallery-db'
 
 /**
  * POST /api/gallery/cart
@@ -23,34 +24,72 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const { getAdminClient } = await import('@/lib/server/supabase-admin')
+    const supabaseAdmin = getAdminClient()
+    const eventId = await resolveEventIdBySlug(supabaseAdmin, eventSlug)
+
+    if (!eventId) {
+      return NextResponse.json({ error: 'Event not found' }, { status: 404 })
+    }
+
     // Calculate pricing based on quantity
     const pricing = defaultEventPricing
     const quantity = photoIds.length
     const { productType, unitPrice, totalPrice, savings } = calculateBestDeal(quantity, pricing)
 
-    // Upsert cart
-    const { data, error } = await supabase
-      .from('carts')
+    const { data: session, error: sessionError } = await supabaseAdmin
+      .from('user_sessions')
       .upsert(
         {
-          session_id: sessionToken,
-          event_id: eventSlug,
-          photo_ids: photoIds,
-          product_type: productType,
-          quantity,
-          unit_price: unitPrice,
-          subtotal: unitPrice * quantity,
-          discount_amount: savings,
-          total_price: totalPrice,
-          updated_at: new Date().toISOString(),
+          event_id: eventId,
+          session_token: sessionToken,
+          selected_photo_ids: photoIds,
+          last_activity: new Date().toISOString(),
         },
-        { onConflict: 'session_id' }
+        { onConflict: 'session_token' }
       )
-      .select()
+      .select('id')
       .single()
 
+    if (sessionError || !session) {
+      console.error('Session upsert error:', sessionError)
+      return NextResponse.json({ error: 'Failed to save session' }, { status: 500 })
+    }
+
+    const cartPayload = {
+      session_id: session.id,
+      event_id: eventId,
+      photo_ids: photoIds,
+      product_type: productType,
+      quantity,
+      unit_price: unitPrice,
+      subtotal: unitPrice * quantity,
+      discount_amount: savings,
+      total_price: totalPrice,
+      updated_at: new Date().toISOString(),
+    }
+
+    const { data: existingCart } = await supabaseAdmin
+      .from('carts')
+      .select('id')
+      .eq('session_id', session.id)
+      .maybeSingle()
+
+    const { data, error } = existingCart?.id
+      ? await supabaseAdmin
+          .from('carts')
+          .update(cartPayload)
+          .eq('id', existingCart.id)
+          .select()
+          .single()
+      : await supabaseAdmin
+          .from('carts')
+          .insert(cartPayload)
+          .select()
+          .single()
+
     if (error) {
-      console.error('Cart upsert error:', error)
+      console.error('Cart save error:', error)
       return NextResponse.json({ error: 'Failed to save cart' }, { status: 500 })
     }
 
@@ -88,11 +127,24 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Missing sessionToken' }, { status: 400 })
     }
 
-    const { data, error } = await supabase
+    const { getAdminClient } = await import('@/lib/server/supabase-admin')
+    const supabaseAdmin = getAdminClient()
+
+    const { data: session } = await supabaseAdmin
+      .from('user_sessions')
+      .select('id')
+      .eq('session_token', sessionToken)
+      .maybeSingle()
+
+    if (!session) {
+      return NextResponse.json({ success: true, cart: null })
+    }
+
+    const { data, error } = await supabaseAdmin
       .from('carts')
       .select('*')
-      .eq('session_id', sessionToken)
-      .single()
+      .eq('session_id', session.id)
+      .maybeSingle()
 
     if (error || !data) {
       return NextResponse.json({ success: true, cart: null })

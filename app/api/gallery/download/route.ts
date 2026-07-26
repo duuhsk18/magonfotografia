@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { isSupabaseConfigured } from '@/lib/supabase'
-import { getSignedDownloadUrl } from '@/lib/server/r2'
-import { photoStorageKeys } from '@/lib/server/r2'
+import { getSignedDownloadUrl, photoStorageKeys } from '@/lib/server/r2'
 
 /**
  * GET /api/gallery/download?orderId=xxx&photoId=yyy
@@ -47,7 +46,14 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Order not found or not paid' }, { status: 403 })
     }
 
-    if (order.session_id !== sessionToken) {
+    // Resolve session token to user_sessions.id and compare
+    const { data: session } = await supabaseAdmin
+      .from('user_sessions')
+      .select('id')
+      .eq('session_token', sessionToken)
+      .maybeSingle()
+
+    if (!session || order.session_id !== session.id) {
       console.warn(`Session mismatch: orderId=${orderId}`)
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 })
     }
@@ -69,8 +75,17 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Photo not found' }, { status: 404 })
     }
 
+    // Get event slug for R2 storage path
+    const { data: eventRow } = await supabaseAdmin
+      .from('events')
+      .select('slug')
+      .eq('id', order.event_id)
+      .single()
+
+    const eventSlug = eventRow?.slug || order.event_id
+
     // Generate signed URL to R2
-    const storageKeys = photoStorageKeys(order.event_id, photo.filename)
+    const storageKeys = photoStorageKeys(eventSlug, photo.filename)
     const downloadUrl = await getSignedDownloadUrl(storageKeys.original, 3600) // 1 hour
 
     // Record download attempt (but don't block if this fails)

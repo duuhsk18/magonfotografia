@@ -33,11 +33,22 @@ export async function POST(request: NextRequest) {
     const { getAdminClient } = await import('@/lib/server/supabase-admin')
     const supabaseAdmin = getAdminClient()
 
+    // Resolve session
+    const { data: session } = await supabaseAdmin
+      .from('user_sessions')
+      .select('id')
+      .eq('session_token', sessionToken)
+      .maybeSingle()
+
+    if (!session) {
+      return NextResponse.json({ error: 'Session not found' }, { status: 404 })
+    }
+
     // Get cart
     const { data: cart, error: cartError } = await supabaseAdmin
       .from('carts')
       .select('*')
-      .eq('session_id', sessionToken)
+      .eq('session_id', session.id)
       .single()
 
     if (cartError || !cart) {
@@ -70,7 +81,7 @@ export async function POST(request: NextRequest) {
         order_number: orderNumber,
         cart_id: cart.id,
         event_id: cart.event_id,
-        session_id: sessionToken,
+        session_id: session.id,
         email,
         photo_ids: cart.photo_ids,
         product_type: cart.product_type,
