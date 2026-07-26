@@ -74,7 +74,7 @@ export async function GET(request: NextRequest) {
     const downloadUrl = await getSignedDownloadUrl(storageKeys.original, 3600) // 1 hour
 
     // Record download attempt (but don't block if this fails)
-    supabaseAdmin
+    const { error: downloadUpdateError } = await supabaseAdmin
       .from('downloads')
       .update({
         downloaded: true,
@@ -84,8 +84,10 @@ export async function GET(request: NextRequest) {
       })
       .eq('order_id', orderId)
       .eq('photo_id', photoId)
-      .then()
-      .catch((err) => console.error('Failed to record download:', err))
+
+    if (downloadUpdateError) {
+      console.error('Failed to record download:', downloadUpdateError)
+    }
 
     return NextResponse.json(
       {

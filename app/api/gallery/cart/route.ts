@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase, isSupabaseConfigured } from '@/lib/supabase'
-import { circuitoCidadesPaulistasEvent, defaultEventPricing } from '@/lib/gallery-event'
+import { defaultEventPricing } from '@/lib/gallery-event'
 
 /**
  * POST /api/gallery/cart

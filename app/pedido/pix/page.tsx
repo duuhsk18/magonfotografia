@@ -1,33 +1,28 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 
 export default function PedidoPixPage() {
-  const [pixCode, setPixCode] = useState('')
-  const [orderNumber, setOrderNumber] = useState('')
-  const [copied, setCopied] = useState(false)
-
-  useEffect(() => {
-    // Read from URL params and localStorage
-    const params = new URLSearchParams(window.location.search)
-    const order = params.get('order') || ''
-    setOrderNumber(order)
-
-    // Try to get Pix code from localStorage (set during checkout)
+  const [pixCode] = useState(() => {
+    if (typeof window === 'undefined') return ''
     const eventSlug = 'circuito-cidades-paulistas-sao-carlos-2026'
-    const savedPix = localStorage.getItem(`magon-pix-${eventSlug}`)
-    if (savedPix) {
-      setPixCode(savedPix)
-    }
-  }, [])
+    return localStorage.getItem(`magon-pix-${eventSlug}`) || ''
+  })
+  const [orderNumber] = useState(() => {
+    if (typeof window === 'undefined') return ''
+    return new URLSearchParams(window.location.search).get('order') || ''
+  })
+  const [copied, setCopied] = useState(false)
 
   async function copyPix() {
     try {
       await navigator.clipboard.writeText(pixCode)
       setCopied(true)
       setTimeout(() => setCopied(false), 3000)
-    } catch {}
+    } catch (error) {
+      console.warn('Failed to copy Pix code:', error)
+    }
   }
 
   return (

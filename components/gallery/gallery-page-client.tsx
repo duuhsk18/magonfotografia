@@ -18,34 +18,30 @@ interface GalleryPageClientProps {
 export function GalleryPageClient({ event }: GalleryPageClientProps) {
   const [photos, setPhotos] = useState<Photo[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const [selectedIds, setSelectedIds] = useState<string[]>(() => {
+    if (typeof window === 'undefined') return []
+    const saved = localStorage.getItem(`magon-selection-${event.slug}`)
+    if (!saved) return []
+
+    try {
+      return JSON.parse(saved)
+    } catch (error) {
+      console.warn('Failed to restore gallery selection:', error)
+      return []
+    }
+  })
   const [previewPhoto, setPreviewPhoto] = useState<Photo | null>(null)
   const [showCart, setShowCart] = useState(false)
   const [searchBib, setSearchBib] = useState('')
   const [searchResults, setSearchResults] = useState<{ matched: Photo[]; suggested: Photo[] } | null>(null)
   const [searching, setSearching] = useState(false)
 
-  // Load photos on mount
-  useEffect(() => {
-    loadPhotos()
-  }, [])
-
-  // Restore selection from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem(`magon-selection-${event.slug}`)
-    if (saved) {
-      try {
-        setSelectedIds(JSON.parse(saved))
-      } catch {}
-    }
-  }, [event.slug])
-
   // Save selection to localStorage
   useEffect(() => {
     localStorage.setItem(`magon-selection-${event.slug}`, JSON.stringify(selectedIds))
   }, [selectedIds, event.slug])
 
-  async function loadPhotos() {
+  const loadPhotos = useCallback(async () => {
     setLoading(true)
     try {
       const res = await fetch(`/api/gallery/photos?eventSlug=${event.slug}&limit=200`)
@@ -58,7 +54,16 @@ export function GalleryPageClient({ event }: GalleryPageClientProps) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [event.slug])
+
+  // Load photos on mount and when event changes.
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      void loadPhotos()
+    }, 0)
+
+    return () => window.clearTimeout(timer)
+  }, [loadPhotos])
 
   async function handleSearch() {
     if (!searchBib.trim()) return
@@ -87,8 +92,6 @@ export function GalleryPageClient({ event }: GalleryPageClientProps) {
     setSearchResults(null)
     setSearchBib('')
   }
-
-  const displayPhotos = searchResults ? [...searchResults.matched, ...searchResults.suggested] : photos
 
   return (
     <>

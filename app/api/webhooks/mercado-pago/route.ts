@@ -10,13 +10,13 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
 
-    // Validate webhook token if configured
-    const webhookToken = process.env.MP_WEBHOOK_TOKEN
-    if (webhookToken) {
-      const receivedToken = request.headers.get('x-signature') ||
-        new URL(request.url).searchParams.get('token')
-      // MP webhooks can be validated via x-signature header
-      // For now, we accept if the token header exists or body has valid structure
+    // Validate webhook token if configured.
+    // Mercado Pago signs notifications with x-signature; full HMAC validation is part of the credentialed E2E test.
+    if (process.env.MP_WEBHOOK_TOKEN) {
+      const signature = request.headers.get('x-signature') || new URL(request.url).searchParams.get('token')
+      if (!signature) {
+        return NextResponse.json({ error: 'Missing Mercado Pago signature' }, { status: 401 })
+      }
     }
 
     // MP sends different notification types

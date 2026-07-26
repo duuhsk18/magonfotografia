@@ -91,7 +91,8 @@ export function CartModal({ selectedIds, photos, event, onClose, onRemovePhoto }
           window.location.href = `/pedido/pix?order=${orderData.order.orderNumber}`
         }
       }
-    } catch (err) {
+    } catch (error) {
+      console.error('Checkout error:', error)
       setError('Erro de conexão. Tente novamente.')
       setProcessing(false)
     }
