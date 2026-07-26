@@ -65,9 +65,10 @@ function PhotoCard({
         isSelected ? 'ring-2 ring-cream ring-offset-2 ring-offset-background' : ''
       }`}
     >
-      {/* Preview image (with watermark) */}
+      {/* Preview image (with watermark + protection) */}
       <div
-        className="h-full w-full"
+        className="protected-container h-full w-full"
+        data-protected
         onClick={() => onPreview(photo)}
         role="button"
         tabIndex={0}
@@ -79,8 +80,9 @@ function PhotoCard({
             src={photo.previewThumbUrl}
             alt={`Foto${photo.bibNumber ? ` — número ${photo.bibNumber}` : ''}`}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="protected-image object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
+            draggable={false}
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-charcoal-soft">

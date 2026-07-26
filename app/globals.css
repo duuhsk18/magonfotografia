@@ -137,4 +137,47 @@ html.lenis body {
   .focus-ring:focus-visible {
     outline-color: var(--color-cream);
   }
+
+  /* Image protection utilities */
+  .protected-image {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    pointer-events: none;
+  }
+
+  .protected-container {
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Invisible overlay to block screenshot crop tools */
+  .protected-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* Hide images when printing */
+@media print {
+  [data-protected] img,
+  .protected-image {
+    visibility: hidden !important;
+  }
+
+  [data-protected]::after {
+    content: 'Conteúdo protegido — Magon Fotografia';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+    background: #0b0a09;
+    color: #ece5d6;
+    font-size: 1.5rem;
+  }
 }

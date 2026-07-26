@@ -7,6 +7,7 @@ import { PhotoPreview } from './photo-preview'
 import { CartBar } from './cart-bar'
 import { CartModal } from './cart-modal'
 import { PromoPopup } from './promo-popup'
+import { ImageProtection } from './image-protection'
 
 interface GalleryPageClientProps {
   event: Event
@@ -209,6 +210,9 @@ export function GalleryPageClient({ event }: GalleryPageClientProps) {
           onRemovePhoto={(id) => setSelectedIds((prev) => prev.filter((p) => p !== id))}
         />
       )}
+
+      {/* Image protection */}
+      <ImageProtection />
 
       {/* Promo popup */}
       {showPromo && (
