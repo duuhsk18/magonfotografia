@@ -9,10 +9,18 @@ interface EventHeroProps {
 export function EventHero({ event }: EventHeroProps) {
   return (
     <section className="relative isolate overflow-hidden border-b border-border bg-charcoal px-6 py-8 md:px-12 md:py-10">
-      <div className="absolute inset-0 -z-10 opacity-30">
-        <div className="absolute left-1/2 top-0 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-espresso blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-[24rem] w-[24rem] rounded-full bg-espresso-soft blur-[120px]" />
-      </div>
+      {/* Video background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 -z-20 h-full w-full object-cover"
+        poster="/media/hero-poster.png"
+      >
+        <source src="/media/marathon-hero.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-charcoal/80 via-charcoal/70 to-charcoal/90" />
 
       <header className="mb-16 flex items-center justify-between gap-6 md:mb-24">
         <Link href="/" className="focus-ring inline-flex" aria-label="Voltar para Magon Fotografia">
