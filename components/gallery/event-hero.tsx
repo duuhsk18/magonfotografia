@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { BrandMark } from '@/components/brand-mark'
+import { HeroSlideshow } from './hero-slideshow'
 import type { Event } from '@/lib/gallery.types'
 
 interface EventHeroProps {
@@ -10,21 +11,8 @@ interface EventHeroProps {
 export function EventHero({ event }: EventHeroProps) {
   return (
     <section className="relative overflow-hidden bg-charcoal">
-      {/* Photo background — positioned right/center, gradient fades left for text */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/media/hero-event.jpg"
-          alt=""
-          className="h-full w-full object-cover object-[center_30%]"
-          draggable={false}
-        />
-        {/* Left-to-right gradient: opaque left (text) → transparent right (photo shows) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal from-30% via-charcoal/80 via-50% to-transparent" />
-        {/* Mobile: slightly darker overall for readability */}
-        <div className="absolute inset-0 bg-charcoal/40 lg:bg-transparent" />
-        {/* Top/bottom fade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/50 via-transparent to-charcoal/70" />
-      </div>
+      {/* Photo slideshow background */}
+      <HeroSlideshow />
 
       {/* Header */}
       <header className="relative z-10 flex items-center justify-between gap-6 px-6 py-6 md:px-12 md:py-8">
@@ -113,19 +101,6 @@ export function EventHero({ event }: EventHeroProps) {
               </p>
             </div>
 
-            {/* Featured photos placeholder — will show curated event photos */}
-            <div className="grid grid-cols-3 gap-2 overflow-hidden rounded-xl">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="aspect-[3/4] bg-charcoal-soft">
-                  <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
-                    Foto {i}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="text-center text-xs text-muted-foreground">
-              Destaques da cobertura (em breve)
-            </p>
           </div>
         </div>
       </div>
