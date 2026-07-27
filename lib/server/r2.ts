@@ -70,18 +70,19 @@ export async function uploadToR2(
 /**
  * Generate a presigned URL for private file download.
  * Expires after specified seconds (default 1 hour).
- * Use for delivering purchased originals.
+ * Uses the PRIVATE bucket (magon-gallery-originals) — no public access.
  */
 export async function getSignedDownloadUrl(
   key: string,
   expiresIn = 3600
 ): Promise<string> {
   const client = getR2Client()
+  const privateBucket = getOriginalsBucket()
 
   const url = await getSignedUrl(
     client,
     new GetObjectCommand({
-      Bucket: bucket,
+      Bucket: privateBucket,
       Key: key,
     }),
     { expiresIn }
@@ -127,7 +128,7 @@ export function photoStorageKeys(eventSlug: string, filename: string) {
   const name = filename.replace(/\.[^.]+$/, '')
 
   return {
-    original: `private/${eventSlug}/${filename}`,
+    original: `${eventSlug}/${filename}`,
     preview: `${base}/previews/${name}_preview.jpg`,
     thumb: `${base}/thumbs/${name}_thumb.jpg`,
   }
