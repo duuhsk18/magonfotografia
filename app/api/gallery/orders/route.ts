@@ -165,8 +165,9 @@ async function createStripePayment(
         price_data: {
           currency: 'brl',
           product_data: {
-            name: `Fotos Magon — Pedido ${orderNumber}`,
-            description: 'Fotografias em alta resolução sem marca d\'água',
+            name: `Fotos Magon Fotografia — ${orderNumber}`,
+            description: 'Fotografias em alta resolução, sem marca d\'água. Download disponível por 7 dias após confirmação.',
+            images: [`${process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL}/brand/magonfotografia-white-crop.png`],
           },
           unit_amount: Math.round(amount * 100), // Stripe uses cents
         },
@@ -177,8 +178,15 @@ async function createStripePayment(
       order_id: orderId,
       order_number: orderNumber,
     },
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/pedido/sucesso?order=${orderNumber}`,
+    // Branding
+    custom_text: {
+      submit: { message: 'Suas fotos em alta resolução serão liberadas imediatamente após a confirmação do pagamento.' },
+    },
+    // URLs
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/pedido/downloads?order=${orderNumber}`,
     cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pedido/cancelado?order=${orderNumber}`,
+    // Expiry
+    expires_at: Math.floor(Date.now() / 1000) + 30 * 60, // 30 minutes
   })
 
   return {
