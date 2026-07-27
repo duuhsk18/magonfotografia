@@ -1,6 +1,7 @@
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { Preloader } from "@/components/preloader";
+import { EventBanner } from "@/components/event-banner";
 import { Hero } from "@/components/hero";
 import { PortfolioShowcase } from "@/components/portfolio-showcase";
 import { Manifesto } from "@/components/manifesto";
@@ -21,6 +22,7 @@ export default function Page() {
       <ScrollProgress />
       <main className="w-full bg-charcoal">
         <Hero />
+        <EventBanner />
         <PortfolioShowcase />
         <Manifesto />
         <FeaturedWorks />
