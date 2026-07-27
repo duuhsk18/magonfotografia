@@ -15,7 +15,9 @@ interface CartModalProps {
 
 export function CartModal({ selectedIds, photos, event, onClose, onRemovePhoto }: CartModalProps) {
   const [email, setEmail] = useState('')
-  const [paymentMethod, setPaymentMethod] = useState<'card' | 'pix'>('pix')
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'pix'>('card')
+  // Pix temporariamente desabilitado — credenciais MP não funcionam no sandbox
+  const pixEnabled = false
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState('')
 
@@ -174,29 +176,27 @@ export function CartModal({ selectedIds, photos, event, onClose, onRemovePhoto }
             />
           </label>
 
-          <div className="mb-4 grid grid-cols-2 gap-3">
-            <button
-              type="button"
-              onClick={() => setPaymentMethod('pix')}
-              className={`focus-ring border px-4 py-3 text-sm transition-colors ${
-                paymentMethod === 'pix'
-                  ? 'border-cream bg-cream/10 text-cream'
-                  : 'border-border text-muted-foreground hover:text-cream'
-              }`}
-            >
-              Pix (instantâneo)
-            </button>
+          <div className="mb-4 grid grid-cols-1 gap-3">
             <button
               type="button"
               onClick={() => setPaymentMethod('card')}
-              className={`focus-ring border px-4 py-3 text-sm transition-colors ${
-                paymentMethod === 'card'
-                  ? 'border-cream bg-cream/10 text-cream'
-                  : 'border-border text-muted-foreground hover:text-cream'
-              }`}
+              className="focus-ring border border-cream bg-cream/10 px-4 py-3 text-sm text-cream"
             >
-              Cartão
+              Cartão de crédito ou débito
             </button>
+            {pixEnabled && (
+              <button
+                type="button"
+                onClick={() => setPaymentMethod('pix')}
+                className={`focus-ring border px-4 py-3 text-sm transition-colors ${
+                  paymentMethod === 'pix'
+                    ? 'border-cream bg-cream/10 text-cream'
+                    : 'border-border text-muted-foreground hover:text-cream'
+                }`}
+              >
+                Pix (instantâneo)
+              </button>
+            )}
           </div>
 
           {error && (
@@ -213,7 +213,7 @@ export function CartModal({ selectedIds, photos, event, onClose, onRemovePhoto }
           </button>
 
           <p className="mt-3 text-center text-xs text-muted-foreground">
-            Pagamento seguro via {paymentMethod === 'pix' ? 'Mercado Pago' : 'Stripe'}.
+            Pagamento seguro via Stripe.
             Fotos em alta resolução, sem marca d'água.
           </p>
         </div>
