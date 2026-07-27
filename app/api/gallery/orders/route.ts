@@ -182,8 +182,8 @@ async function createStripePayment(
     custom_text: {
       submit: { message: 'Suas fotos em alta resolução serão liberadas imediatamente após a confirmação do pagamento.' },
     },
-    // URLs
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/pedido/downloads?order=${orderNumber}`,
+    // URLs — {CHECKOUT_SESSION_ID} is replaced by Stripe with actual session ID
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/pedido/sucesso?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pedido/cancelado?order=${orderNumber}`,
     // Expiry
     expires_at: Math.floor(Date.now() / 1000) + 30 * 60, // 30 minutes
