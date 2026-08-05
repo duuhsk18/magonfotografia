@@ -23,11 +23,17 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.magonfotografia.com.br'),
   title: 'MAGON — Fotografia & Audiovisual',
   description:
     'Imagens para viver agora, lembrar depois. Produtora visual autoral de fotografia, filmes e direção visual. São Carlos — SP.',
   keywords:
     'fotografia, audiovisual, vídeo, produtora visual, cinema, direção visual, São Carlos, shows, eventos, retratos, marcas',
+  verification: {
+    other: {
+      'p:domain_verify': ['ceef62e60095c2f7c1eb742101054fea'],
+    },
+  },
 }
 
 export const viewport: Viewport = {
