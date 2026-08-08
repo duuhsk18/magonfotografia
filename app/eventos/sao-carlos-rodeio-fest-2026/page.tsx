@@ -3,10 +3,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { BrandMark } from '@/components/brand-mark'
 import { EventFooter } from '@/components/gallery/event-footer'
+import { ImageProtection } from '@/components/gallery/image-protection'
 import {
   rodeioEvent,
   rodeioHero,
   rodeioShowImages,
+  rodeioMontariaImages,
   rodeioPublicoImages,
   rodeioComingSoon,
   WHATSAPP_PARTICIPANTE,
@@ -44,10 +46,11 @@ export const metadata: Metadata = {
 
 export default function RodeioFestPage() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen select-none bg-background text-foreground">
+      <ImageProtection />
       {/* ============================ HERO ============================ */}
-      <section className="relative min-h-[92vh] overflow-hidden bg-charcoal">
-        <Image src={rodeioHero.src} alt={rodeioHero.alt} fill priority sizes="100vw" className="object-cover opacity-80" />
+      <section className="relative min-h-[92vh] overflow-hidden bg-charcoal" data-protected>
+        <Image src={rodeioHero.src} alt={rodeioHero.alt} fill priority sizes="100vw" draggable={false} className="object-cover opacity-80" />
         <div
           aria-hidden
           className="absolute inset-0"
@@ -151,13 +154,14 @@ export default function RodeioFestPage() {
           </div>
 
           {/* Feature landscape */}
-          <div className="relative mb-4 aspect-[16/9] overflow-hidden rounded-2xl border border-border bg-charcoal">
+          <div data-protected className="relative mb-4 aspect-[16/9] overflow-hidden rounded-2xl border border-border bg-charcoal">
             <Image
               src={rodeioShowImages[0].src}
               alt={rodeioShowImages[0].alt}
               fill
+              draggable={false}
               sizes="100vw"
-              className="object-cover transition-transform duration-700 hover:scale-[1.03]"
+              className="pointer-events-none object-cover transition-transform duration-700 hover:scale-[1.03]"
             />
           </div>
 
@@ -170,8 +174,25 @@ export default function RodeioFestPage() {
         </div>
       </section>
 
-      {/* ============================ O PÚBLICO ============================ */}
+      {/* ============================ MONTARIA & ARENA ============================ */}
       <section className="border-t border-border bg-charcoal-soft px-6 py-16 md:px-12 md:py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+            <h2 className="font-display text-5xl leading-[0.9] text-warm-white md:text-7xl">Montaria &amp; arena</h2>
+            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
+              A abertura, a cerimônia e a montaria — a raiz do rodeio antes do show.
+            </p>
+          </div>
+          <div className="grid gap-3 md:grid-cols-3 md:gap-4">
+            <GridImg img={rodeioMontariaImages[0]} className="aspect-[3/4] md:row-span-2 md:aspect-auto" />
+            <GridImg img={rodeioMontariaImages[1]} className="aspect-[16/9] md:col-span-2" />
+            <GridImg img={rodeioMontariaImages[2]} className="aspect-[16/9] md:col-span-2" />
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ O PÚBLICO ============================ */}
+      <section className="border-t border-border px-6 py-16 md:px-12 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
             <h2 className="font-display text-5xl leading-[0.9] text-warm-white md:text-7xl">O público</h2>
@@ -287,13 +308,14 @@ export default function RodeioFestPage() {
 
 function GridImg({ img, className = '' }: { img: { src: string; alt: string }; className?: string }) {
   return (
-    <div className={`relative overflow-hidden rounded-xl border border-border bg-charcoal ${className}`}>
+    <div data-protected className={`relative overflow-hidden rounded-xl border border-border bg-charcoal ${className}`}>
       <Image
         src={img.src}
         alt={img.alt}
         fill
+        draggable={false}
         sizes="(max-width: 768px) 50vw, 25vw"
-        className="object-cover transition-transform duration-700 hover:scale-105"
+        className="pointer-events-none object-cover transition-transform duration-700 hover:scale-105"
       />
     </div>
   )

@@ -1,12 +1,12 @@
 /**
  * RODEIO FEST 2026 — dados da cobertura (07.08 / noite de abertura).
  *
- * As imagens abaixo são FOTOS REAIS da cobertura de Eduardo Magon na noite de
- * 07/08 (Matheus & Kauan + Ícaro e Gilmar), já com marca d'água Magon.
- * Ainda em processamento: MONTARIA / CERIMÔNIAS, VÍDEO da noite e a GALERIA COMPLETA.
+ * Fotos REAIS de Eduardo Magon na noite de 07/08 (Matheus & Kauan + Ícaro e Gilmar),
+ * com marca d'água Magon. Blocos: show/palco, montaria/arena e público.
+ * Ainda em processamento: VÍDEO da noite e a GALERIA COMPLETA em alta.
  *
- * Para adicionar mais fotos: solte os arquivos em /public/images/rodeio/ e
- * inclua na lista correspondente abaixo. Nenhuma mudança de layout é necessária.
+ * Para adicionar mais fotos: solte os .webp em /public/images/rodeio/ e inclua na
+ * lista correspondente abaixo. Nenhuma mudança de layout é necessária.
  */
 
 export const rodeioEvent = {
@@ -33,27 +33,43 @@ export const rodeioHero: RodeioImage = {
 /** Palco, artistas e show — noite de 07.08. */
 export const rodeioShowImages: RodeioImage[] = [
   { src: '/images/rodeio/rodeio-palco-01.webp', alt: 'Palco principal iluminado — Rodeio Fest 2026, 07.08' },
-  { src: '/images/rodeio/rodeio-artistas-01.webp', alt: 'Show no palco — Rodeio Fest 2026, 07.08' },
-  { src: '/images/rodeio/rodeio-artistas-02.webp', alt: 'Cantor no palco — Rodeio Fest 2026, 07.08' },
-  { src: '/images/rodeio/rodeio-artistas-03.webp', alt: 'Apresentação no palco — Rodeio Fest 2026, 07.08' },
-  { src: '/images/rodeio/rodeio-artistas-04.webp', alt: 'Cantor durante o show — Rodeio Fest 2026, 07.08' },
-  { src: '/images/rodeio/rodeio-artistas-05.webp', alt: 'Sanfoneiro no palco — Rodeio Fest 2026, 07.08' },
-  { src: '/images/rodeio/rodeio-artistas-06.webp', alt: 'Músico no palco — Rodeio Fest 2026, 07.08' },
-  { src: '/images/rodeio/rodeio-show-danca.webp', alt: 'Performance de palco — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-show-01.webp', alt: 'Show no palco — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-show-02.webp', alt: 'Cantor no palco — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-show-03.webp', alt: 'Apresentação no palco — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-show-04.webp', alt: 'Cantor durante o show — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-show-05.webp', alt: 'Músico no palco — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-show-06.webp', alt: 'Banda no palco — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-show-07.webp', alt: 'Show no palco — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-show-08.webp', alt: 'Cantor no palco — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-show-09.webp', alt: 'Sanfoneiro no palco — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-show-10.webp', alt: 'Cantor durante o show — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-show-11.webp', alt: 'Performance de palco — Rodeio Fest 2026, 07.08' },
+]
+
+/** Montaria, cerimônia e arena — noite de 07.08. */
+export const rodeioMontariaImages: RodeioImage[] = [
+  { src: '/images/rodeio/rodeio-montaria-01.webp', alt: 'Montaria na arena — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-montaria-02.webp', alt: 'Cerimônia na arena — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-montaria-03.webp', alt: 'Competidores na arena — Rodeio Fest 2026, 07.08' },
 ]
 
 /** Público e plateia — noite de 07.08. */
 export const rodeioPublicoImages: RodeioImage[] = [
   { src: '/images/rodeio/rodeio-publico-01.webp', alt: 'Público no Rodeio Fest 2026, 07.08' },
-  { src: '/images/rodeio/rodeio-publico-02.webp', alt: 'Plateia acompanhando o show — Rodeio Fest 2026, 07.08' },
-  { src: '/images/rodeio/rodeio-publico-03.webp', alt: 'Público no Rodeio Fest 2026, 07.08' },
-  { src: '/images/rodeio/rodeio-publico-04.webp', alt: 'Casal na plateia — Rodeio Fest 2026, 07.08' },
-  { src: '/images/rodeio/rodeio-publico-05.webp', alt: 'Público no Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-publico-02.webp', alt: 'Público no Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-publico-03.webp', alt: 'Plateia no Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-publico-04.webp', alt: 'Público no Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-publico-05.webp', alt: 'Plateia no Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-publico-06.webp', alt: 'Público no Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-publico-07.webp', alt: 'Casal na plateia — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-publico-08.webp', alt: 'Público no Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-publico-09.webp', alt: 'Público no Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-publico-10.webp', alt: 'Plateia acompanhando o show — Rodeio Fest 2026, 07.08' },
+  { src: '/images/rodeio/rodeio-publico-11.webp', alt: 'Público no Rodeio Fest 2026, 07.08' },
 ]
 
 /** Ainda em processamento — entra aqui em breve. */
 export const rodeioComingSoon = [
-  { key: 'montaria', label: 'Montaria & Cerimônias', note: 'Registro da arena — em edição' },
   { key: 'video', label: 'Vídeo da noite', note: 'O corte da cobertura — em produção' },
   { key: 'galeria', label: 'Galeria completa', note: 'Seleção final em alta — em breve' },
 ]
