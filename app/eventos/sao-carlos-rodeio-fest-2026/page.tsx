@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     siteName: 'Magon Fotografia',
-    url: 'https://magonfotografia.com.br/eventos/sao-carlos-rodeio-fest-2026',
+    url: 'https://www.magonfotografia.com.br/eventos/sao-carlos-rodeio-fest-2026',
     images: [
       {
-        url: 'https://magonfotografia.com.br/og/rodeio-fest-2026.jpg',
+        url: 'https://www.magonfotografia.com.br/og/rodeio-fest-2026.jpg',
         width: 1200,
         height: 630,
         type: 'image/jpeg',
@@ -50,10 +50,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Rodeio Fest 2026 — Cobertura da noite de 07.08',
     description: 'Matheus & Kauan + Ícaro e Gilmar. Cobertura por Eduardo Magon.',
-    images: ['https://magonfotografia.com.br/og/rodeio-fest-2026.jpg'],
+    images: ['https://www.magonfotografia.com.br/og/rodeio-fest-2026.jpg'],
   },
   alternates: {
-    canonical: 'https://magonfotografia.com.br/eventos/sao-carlos-rodeio-fest-2026',
+    canonical: 'https://www.magonfotografia.com.br/eventos/sao-carlos-rodeio-fest-2026',
   },
   robots: { index: true, follow: true },
 }
@@ -151,8 +151,8 @@ export default function RodeioFestPage() {
             <span className="text-amber-400">Ícaro e Gilmar</span>. Do palco ao público, da luz à arena.
           </p>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-cream/70">
-            Esta é a primeira leva da cobertura. A montaria, o vídeo da noite e a galeria completa em
-            alta resolução entram aqui em breve.
+            Show, montaria e público. O vídeo da noite e a galeria completa em alta resolução entram
+            aqui em breve.
           </p>
         </div>
       </section>
