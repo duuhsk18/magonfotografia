@@ -36,7 +36,21 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     siteName: 'Magon Fotografia',
     url: 'https://magonfotografia.com.br/eventos/sao-carlos-rodeio-fest-2026',
-    images: [{ url: 'https://magonfotografia.com.br/images/rodeio/rodeio-hero.webp' }],
+    images: [
+      {
+        url: 'https://magonfotografia.com.br/og/rodeio-fest-2026.jpg',
+        width: 1200,
+        height: 630,
+        type: 'image/jpeg',
+        alt: 'Rodeio Fest 2026 — cobertura da noite de 07.08 por Magon Fotografia',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Rodeio Fest 2026 — Cobertura da noite de 07.08',
+    description: 'Matheus & Kauan + Ícaro e Gilmar. Cobertura por Eduardo Magon.',
+    images: ['https://magonfotografia.com.br/og/rodeio-fest-2026.jpg'],
   },
   alternates: {
     canonical: 'https://magonfotografia.com.br/eventos/sao-carlos-rodeio-fest-2026',
